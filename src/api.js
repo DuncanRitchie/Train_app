@@ -28,7 +28,6 @@ app.get("/train", (req, res) => {
           console.log(response.allDepartures)
           res.send({
             allDepartures: response.allDepartures
-            
           });
         });
       });
