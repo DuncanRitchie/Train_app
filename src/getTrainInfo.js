@@ -1,8 +1,8 @@
 const request = require("request");
 const express = require("express");
 
-const getTrainInfoFromStationCode = (station_code, date, time, callback) => {
-    let url = `http://transportapi.com/v3/uk/train/station/${station_code}/${date}/${time}/timetable.json?type=train_station&app_id=06fa4af4&app_key=131158f245f478626a1f8c44a1927eec`;
+ const getTrainInfoFromStationCode = (station_code, date, time, callback) => {
+    let url = `http://transportapi.com/v3/uk/train/station/${station_code}/${date}/${time}/timetable.json?app_id=06fa4af4&app_key=131158f245f478626a1f8c44a1927eec`;
     request({ url, json: true }, (error, response) => {
       if (error) {
         callback("Unable to connect to train services!", undefined);
@@ -17,3 +17,4 @@ const getTrainInfoFromStationCode = (station_code, date, time, callback) => {
   };
 
   module.exports = getTrainInfoFromStationCode
+ 
