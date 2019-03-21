@@ -5,7 +5,7 @@ const app = express();
 const getStationCodeFromSearch = require("./getStationCode")
 const getStationsFromSearch = require("./getStations")
 const getTrainInfoFromStationCode = require("./getTrainInfo")
-const getNewsFromStationCode = require("./getTrainInfo")
+const getNewsFromStationCode = require("./getNews")
 
 const port = process.env.PORT || 3000;
 
@@ -21,7 +21,7 @@ app.get("/train", (req, res) => {
                 return console.log(error);
             }
             date = "2019-03-21"
-            time = "17:34"
+            time = "22:22"
             getTrainInfoFromStationCode(response.station_code, date, time, (error, response) => {
                 if (error) {
                     return console.log(error);
@@ -44,7 +44,7 @@ app.get("/station", (req, res) => {
                 return console.log(error)
             }
             console.log(response.stations)
-            response.send({ stations: response.stations })
+            res.send({ stations: response.stations })
         })
     }
 })
@@ -61,7 +61,7 @@ app.get("/news", (req, res) => {
                 if (error) {
                     return console.log(error);
                 }
-                console.log(response.allNews)
+                console.log(response.news)
                 res.send({
                     news: response.news
                 });
