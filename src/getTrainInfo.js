@@ -1,5 +1,5 @@
+const request = require("request");
 const express = require("express");
-const app = express();
 
 const getTrainInfoFromStationCode = (station_code, date, time, callback) => {
     let url = `/uk/train/station/${station_code}/${date}/${time}/timetable.json`;

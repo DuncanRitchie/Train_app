@@ -1,4 +1,5 @@
-const express = require("express")
+const request = require("request")
+const express = require("express");
 
 const getStationCodeFromSearch = (query, callback) => {
     let url = `http://transportapi.com/v3/uk/places.json?query=${query}&type=train_station&app_id=06fa4af4&app_key=131158f245f478626a1f8c44a1927eec`;
