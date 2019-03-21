@@ -2,10 +2,10 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-const getStationCodeFromSearch = require("getStationCodeFromSearch")
-const getTrainInfoFromStationCode = require("getTrainInfoFromStationCode")
+const getStationCodeFromSearch = require("./getStationCode")
+const getTrainInfoFromStationCode = require("./getTrainInfo")
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 
 const publicDirectory = path.join(__dirname, "../public");
 app.use(express.static(publicDirectory));
@@ -15,11 +15,20 @@ app.get("/train", (req, res) => {
     res.send("Please provide an address");
   }
   else {
-    getStationCodeFromSearch(req.query.address)
-    getTrainInfoFromStationCode(station_code)
-        res.send({
-          
-        })
+      getStationCodeFromSearch(req.query.address, (error, response) => {
+        if (error) {
+          return console.log(error);
+        }
+        getTrainInfoFromStationCode(response.station_code, (error, response) => {
+          if (error) {
+              return console.log(error);
+          }
+          console.log(response.allDepartures)
+          res.send({
+            allDepartures: response.allDepartures
+          });
+        });
+      });
     }
 })
 
