@@ -6,11 +6,11 @@ const express = require("express");
     request({ url, json: true }, (error, response) => {
       if (error) {
         callback("Unable to connect to train services!", undefined);
-      } else if (response.body.departures.length === 0) {
+      } else if (response.body.length === 0) {
         callback("Unable to find station. Try another search.", undefined);
       } else {
         callback(undefined, {
-          allDepartures: response.body.departures.all
+          allDepartures: response.body
         });
       }
     });
