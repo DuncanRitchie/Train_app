@@ -19,7 +19,9 @@ app.get("/train", (req, res) => {
         if (error) {
           return console.log(error);
         }
-        getTrainInfoFromStationCode(response.station_code, (error, response) => {
+        date = "2019-03-21"
+        time = "17:34"
+        getTrainInfoFromStationCode(response.station_code, date, time, (error, response) => {
           if (error) {
               return console.log(error);
           }
