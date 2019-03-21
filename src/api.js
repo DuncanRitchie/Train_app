@@ -14,7 +14,7 @@ app.get("/train", (req, res) => {
   if (!req.query.address) {
     res.send("Please provide an address");
   }
-  else {
+  else  {
       getStationCodeFromSearch(req.query.address, (error, response) => {
         if (error) {
           return console.log(error);
@@ -26,6 +26,7 @@ app.get("/train", (req, res) => {
           console.log(response.allDepartures)
           res.send({
             allDepartures: response.allDepartures
+            
           });
         });
       });
