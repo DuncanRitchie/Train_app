@@ -13,10 +13,10 @@ const publicDirectory = path.join(__dirname, "../public");
 app.use(express.static(publicDirectory));
 
 app.get("/train", (req, res) => {
-    if (!req.query.address) {
-        res.send("Please provide an address");
+    if (!req.query.LeavingStation) {
+        res.send("Please provide a leaving station");
     } else {
-        getStationCodeFromSearch(req.query.address, (error, response) => {
+        getStationCodeFromSearch(req.query.LeavingStation, (error, response) => {
             if (error) {
                 return console.log(error);
             }// Following code sets the leavingDate.
@@ -44,9 +44,17 @@ app.get("/train", (req, res) => {
             }
             else {
               now = new Date()
-              leavingTime = `${now.getHours()}:${now.getMinutes()}`
+              hour = now.getHours()
+              if (hour < 10) {
+                hour = "0"+hour;
+              }
+              minute = now.getMinutes()
+              if (minute < 10) {
+                minute = "0"+minute;
+              }
+              leavingTime = `${hour}:${minute}`
             }
-            console.log("The date is "+leavingDate+"   and the time is "+leavingTime)
+            console.log("The date is "+leavingDate+" and the time is "+leavingTime)
             // Following code gets the train info.
             getTrainInfoFromStationCode(response.station_code, leavingDate, leavingTime, (error, response) => {
                 if (error) {
