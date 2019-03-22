@@ -42,7 +42,7 @@ form {
     border-bottom: 1px solid black;
 }
 
-#submit-btn {
+.submit-btn {
     width: 200px;
     background-color: #00ADB5;
     color: #eee;

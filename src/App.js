@@ -7,9 +7,11 @@ class App extends Component {
       fromStation:'', 
       toStation:'', 
       leavingDate:'', 
+      departingStatus:'',
       leavingTime:'', 
       returnCheck:false, 
       returningDate:'', 
+      returningStatus:'',
       returningTime:'', 
       adultCount:1, 
       childCount:0
@@ -25,16 +27,18 @@ class App extends Component {
 
   render() {
     
-    const { fromStation, toStation, leavingDate, leavingTime, returnCheck, returningDate, returningTime, adultCount, childCount } = this.state
+    const { fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount } = this.state
     return (
       <div className="App">
         <Home 
           fromStation={fromStation}
           toStation={toStation} 
           leavingDate={leavingDate}
+          departingStatus={departingStatus}
           leavingTime={leavingTime}
           returnCheck={returnCheck} 
           returningDate={returningDate}
+          returningStatus={returningStatus}
           returningTime={returningTime}
           adultCount={adultCount}
           childCount={childCount}

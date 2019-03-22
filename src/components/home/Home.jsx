@@ -4,7 +4,7 @@ import './Home.css';
 const Home = (props) => {
     const { fromStation, toStation, leavingDate, leavingTime, returnCheck, returningDate, returningTime, adultCount, childCount, handleChange} = props
     return (
-        <div idname="journeyplanner">
+        <div className="journeyplanner">
             <form onSubmit={props.handlSubmit}>
                 <label>Where from?</label>
                 <input className="form-input" type="text" name="fromStation" value={fromStation} placeholder="Station/Postcode" onChange={(e)=>handleChange(e)}/>
@@ -39,7 +39,7 @@ const Home = (props) => {
                 <span className="count-container"><label>adult:</label> <input className="count" type="number" min='1' max='5' name='adultCount' value={adultCount} onChange={(e)=>handleChange(e)}/></span>
                 <span className="count-container"><label>children:</label> <input className="count" type="number" min='0' max='5' name='childCount' value={childCount} onChange={(e)=>handleChange(e)}/></span>
 
-                <button id="submit-btn" onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
+                <button className="submit-btn" onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
             </form>
         </div>
     )
