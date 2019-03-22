@@ -2,44 +2,44 @@ import React from 'react';
 import './Home.css';
 
 const Home = (props) => {
-    const { fromStationValue,toStationValue, leavingDate, leavingTime, returning, returningDate, returningTime, adultCount, childCount, handleChangeFrom, handleChangeTo, handleChangeStatus, handleChangeDate, handleChangeTime, checkReturn, handleChangeReturnStatus, handleChangeReturnDate, handleChangeReturnTime, handleChangeCountAdult, handleChangeCountChild } = props
+    const { fromStation, toStation, leavingDate, leavingTime, returnCheck, returningDate, returningTime, adultCount, childCount, handleChange} = props
     return (
-        <div id="journeyplanner">
+        <div idname="journeyplanner">
             <form onSubmit={props.handlSubmit}>
                 <label>Where from?</label>
-                <input class="form-input" type="text" name="fromStation" value={fromStationValue} placeholder="Station/Postcode" onChange={(e)=>handleChangeFrom(e)}/>
+                <input className="form-input" type="text" name="fromStation" value={fromStation} placeholder="Station/Postcode" onChange={(e)=>handleChange(e)}/>
                 <label>Where to?</label>
-                <input class="form-input" type="text" name="toStation" value={toStationValue}  placeholder="Station/Postcode" onChange={(e)=>handleChangeTo(e)}/>
+                <input className="form-input" type="text" name="toStation" value={toStation}  placeholder="Station/Postcode" onChange={(e)=>handleChange(e)}/>
                 
-                <span class='time-info'>
-                    <input class="form-input" type="date" name="LeavingDate" value={leavingDate} placeholder="Today" onChange={(e)=>handleChangeDate(e)}/>
-                    <select class="form-input" name="Status" onChange={(e)=>handleChangeStatus(e)}>
-                        <option value="LeavingAfter">Leaving After</option>
-                        <option value="ArrivingBefore">Arriving Before</option>
+                <span className='time-info'>
+                    <input className="form-input" type="date" name="leavingDate" value={leavingDate} placeholder="Today" onChange={(e)=>handleChange(e)}/>
+                    <select className="form-input" name="departingStatus" onChange={(e)=>handleChange(e)}>
+                        <option value="leavingAfter">Leaving After</option>
+                        <option value="arrivingBefore">Arriving Before</option>
                     </select>
-                    <input class="form-input" type="time" name="LeavingTime" value={leavingTime}  placeholder="Time" onChange={(e)=>handleChangeTime(e)}/>
-                    <span><input type="checkbox" name="returning?" value={returning} onChange={(e)=>checkReturn(e)}/><label>Return?</label></span>
+                    <input className="form-input" type="time" name="leavingTime" value={leavingTime}  placeholder="Time" onChange={(e)=>handleChange(e)}/>
+                    <span><input type="checkbox" name="returnCheck" value={returnCheck} onChange={(e)=>handleChange(e)}/><label>Return?</label></span>
                 </span>
 
                 
 
-                {props.returning === true ? (
-                    <span class='time-info'>
-                    <input class="form-input" type="date" name="ReturningDate" value={returningDate}  placeholder="Tomorrow" onChange={(e)=>handleChangeReturnDate(e)}/>
-                    <select class="form-input"name="Status" onChange={(e)=>props.handleChangeReturnStatus(e)}>
-                        <option value="LeavingAfter">Leaving After</option>
-                        <option value="ArrivingBefore">Arriving Before</option>
+                {returnCheck === true ? (
+                    <span className='time-info'>
+                    <input className="form-input" type="date" name="returningDate" value={returningDate}  placeholder="Tomorrow" onChange={(e)=>handleChange(e)}/>
+                    <select className="form-input"name="returningStatus" onChange={(e)=>props.handleChange(e)}>
+                        <option value="leavingAfter">Leaving After</option>
+                        <option value="arrivingBefore">Arriving Before</option>
                     </select>
                     
-                    <input class="form-input" type="time" name="ReturningTime" value={returningTime}  placeholder="Time" onChange={(e)=>handleChangeReturnTime(e)}/></span>
+                    <input className="form-input" type="time" name="returningTime" value={returningTime}  placeholder="Time" onChange={(e)=>handleChange(e)}/></span>
                 ) : (
                     <span></span>
                 )}
 
-                <span class="count-container"><label>adult:</label> <input class="count" type="number" min='1' max='5' name='adultcounter' value={adultCount} onChange={(e)=>handleChangeCountAdult(e)}/></span>
-                <span class="count-container"><label>children:</label> <input class="count" type="number" min='0' max='5' name='kidscounter' value={childCount} onChange={(e)=>handleChangeCountChild(e)}/></span>
+                <span className="count-container"><label>adult:</label> <input className="count" type="number" min='1' max='5' name='adultCount' value={adultCount} onChange={(e)=>handleChange(e)}/></span>
+                <span className="count-container"><label>children:</label> <input className="count" type="number" min='0' max='5' name='childCount' value={childCount} onChange={(e)=>handleChange(e)}/></span>
 
-                <button id="submit-btn"onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
+                <button id="submit-btn" onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
             </form>
         </div>
     )

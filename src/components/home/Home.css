@@ -35,6 +35,7 @@ form {
 }
 
 .count {
+    width: 30px;
     margin-left: 15px;
     border: none;
     text-align: center;
