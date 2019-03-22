@@ -13,10 +13,10 @@ const publicDirectory = path.join(__dirname, "../public");
 app.use(express.static(publicDirectory));
 
 app.get("/train", (req, res) => {
-    if (!req.query.LeavingStation) {
-        res.send("Please provide a leaving station");
+    if (!req.query.fromStation) {
+        res.send("Please provide fromStation");
     } else {
-        getStationCodeFromSearch(req.query.LeavingStation, (error, response) => {
+        getStationCodeFromSearch(req.query.fromStation, (error, response) => {
             if (error) {
                 return console.log(error);
             }// Following code sets the leavingDate.
