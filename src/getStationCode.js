@@ -7,7 +7,7 @@ const getStationCodeFromSearch = (query, callback) => {
       if (error) {
         callback("Unable to connect to train services!", undefined);
       } else if (response.body.member.length === 0) {
-        callback("Unable to find station. Try another search.", undefined);
+        callback("Unable to find station code. Try another search.", undefined);
       } else {
         callback(undefined, {
           station_code: response.body.member[0].station_code

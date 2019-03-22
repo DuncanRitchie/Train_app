@@ -8,7 +8,7 @@ const getTrainInfoFromStationCode = (station_code, date, time, callback) => {
         if (error) {
             callback("Unable to connect to train services!", undefined);
         } else if (response.body.departures.all.length === 0) {
-            callback("Unable to find station. Try another search.", undefined);
+            callback("Unable to find train info. Try another search.", undefined);
         } else {
             callback(undefined, { allDepartures: response.body.departures.all });
         }
