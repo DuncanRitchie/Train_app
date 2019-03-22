@@ -40,17 +40,6 @@ class App extends Component {
           childCount={childCount}
           handleChange = {this.handleChange}
         />
-          {/* // handleChangeFrom={this.handleChangeFrom}
-          // handleChangeTo={this.handleChangeTo}
-          // // handleChangeStatus={this.handleChangeStatus}
-          // handleChangeDate={this.handleChangeDate}
-          // handleChangeTime={this.handleChangeTime}
-          // checkReturn={this.checkReturn} 
-          // // handleChangeReturnStatus={this.handleChangeReturnStatus}
-          // handleChangeReturnDate={this.handleChangeReturnDate}
-          // handleChangeReturnTime={this.handleChangeReturnTime}
-          // handleChangeCountAdult={this.handleChangeCountAdult}
-          // handlecChangeCountChild={this.handlecChangeCountChild} */}
           
       </div>
     );
