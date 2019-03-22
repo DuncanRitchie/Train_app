@@ -5,6 +5,7 @@ const app = express();
 const getStationCodeFromSearch = require("./server-src/getStationCode")
 const getStationsFromSearch = require("./server-src/getStations")
 const getTrainInfoFromStationCode = require("./server-src/getTrainInfo")
+const getTicketFares = require("./server-src/getTicketFares")
 const getNewsFromStationCode = require("./server-src/getNews")
 
 const port = process.env.PORT || 3000;
@@ -19,52 +20,60 @@ app.get("/train", (req, res) => {
         getStationCodeFromSearch(req.query.fromStation, (error, response) => {
             if (error) {
                 return console.log(error);
-            }// Following code sets the leavingDate.
-            let leavingDate;
-            let now;
-            if (req.query.LeavingDate) {
-              leavingDate = req.query.LeavingDate
             }
-            else {
-              now = new Date()
-              month = now.getMonth()+1
-              if (month < 10) {
-                month = "0"+month;
-              }
-              day = now.getDate()+1
-              if (day < 10) {
-                day = "0"+day;
-              }
-              leavingDate = `${now.getFullYear()}-${month}-${day}`
-            }
-            // Following code sets the leavingTime.
-            let leavingTime;
-            if (req.query.LeavingTime) {
-              leavingTime = req.query.LeavingTime
-            }
-            else {
-              now = new Date()
-              hour = now.getHours()
-              if (hour < 10) {
-                hour = "0"+hour;
-              }
-              minute = now.getMinutes()
-              if (minute < 10) {
-                minute = "0"+minute;
-              }
-              leavingTime = `${hour}:${minute}`
-            }
-            console.log("The date is "+leavingDate+" and the time is "+leavingTime)
-            // Following code gets the train info.
-            getTrainInfoFromStationCode(response.station_code, leavingDate, leavingTime, (error, response) => {
+            fromStationCode = response.station_code;
+            getStationCodeFromSearch(req.query.toStation, (error, response) => {
                 if (error) {
-                    return console.log(error);
+                    return console.log(error)
                 }
-                console.log(response.allDepartures)
-                res.send({
-                    allDepartures: response.allDepartures
+                toStationCode = response.station_code;
+                // Following code sets the leavingDate.
+                let leavingDate;
+                let now;
+                if (req.query.LeavingDate) {
+                leavingDate = req.query.LeavingDate
+                }
+                else {
+                now = new Date()
+                month = now.getMonth()+1
+                if (month < 10) {
+                    month = "0"+month;
+                }
+                day = now.getDate()+1
+                if (day < 10) {
+                    day = "0"+day;
+                }
+                leavingDate = `${now.getFullYear()}-${month}-${day}`
+                }
+                // Following code sets the leavingTime.
+                let leavingTime;
+                if (req.query.LeavingTime) {
+                leavingTime = req.query.LeavingTime
+                }
+                else {
+                now = new Date()
+                hour = now.getHours()
+                if (hour < 10) {
+                    hour = "0"+hour;
+                }
+                minute = now.getMinutes()
+                if (minute < 10) {
+                    minute = "0"+minute;
+                }
+                leavingTime = `${hour}:${minute}`
+                }
+                console.log("The date is "+leavingDate+" and the time is "+leavingTime)
+                // Following code gets the train info.
+                getTrainInfoFromStationCode(fromStationCode, response.station_code, leavingDate, leavingTime, (error, response) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log(response.allDepartures)
+                    res.send({
+                        allDepartures: response.allDepartures
+                    });
                 });
-            });
+            })
         });
     }
 })
