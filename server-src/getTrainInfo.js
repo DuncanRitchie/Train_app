@@ -29,12 +29,12 @@ const getTrainInfoFromStationCode = (fromStationCode, toStationCode, date, time,
                             }
                         }, function(err) {
                             if (err) console.error(err.message);
-                            if (wantedDepartures == []) {
-                                callback(`No services found going from ${fromStationCode} to ${toStationCode}`, undefined)
-                            } else {
-                                console.log(wantedDepartures)
-                                callback(undefined, { allDepartures: wantedDepartures })
-                            };
+                            // if (wantedDepartures == []) {
+                            //     callback(`No services found going from ${fromStationCode} to ${toStationCode}`, undefined)
+                            // } else {
+                            console.log(wantedDepartures)
+                            callback(undefined, { allDepartures: wantedDepartures })
+                                // };
                         });
                         // for (j = 0; j < res.body.stops.length; j++) {
                         //     if (res.body.stops[j].station_code == toStationCode) {
