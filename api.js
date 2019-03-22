@@ -69,9 +69,15 @@ app.get("/train", (req, res) => {
                         return console.log(error);
                     }
                     console.log(response.allDepartures)
-                    res.send({
-                        allDepartures: response.allDepartures
-                    });
+                    allDepartures = response.allDepartures
+                    getTicketFares(fromStationCode,toStationCode, (error, response)=>{
+                        console.log(response.fares)
+                        res.send({
+                            allDepartures: allDepartures,
+                            fares: response.fares
+                        });
+                    })
+                    
                 });
             })
         });

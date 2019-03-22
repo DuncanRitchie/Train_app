@@ -9,6 +9,7 @@ const getStationCodeFromSearch = (query, callback) => {
       } else if (response.body.member.length === 0) {
         callback("Unable to find station code. Try another search.", undefined);
       } else {
+        console.log("Station code: "+response.body.member[0].station_code)
         callback(undefined, {
           station_code: response.body.member[0].station_code
         });
