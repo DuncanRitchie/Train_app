@@ -19,10 +19,36 @@ app.get("/train", (req, res) => {
         getStationCodeFromSearch(req.query.address, (error, response) => {
             if (error) {
                 return console.log(error);
+            }// Following code sets the leavingDate.
+            let leavingDate;
+            let now;
+            if (req.query.LeavingDate) {
+              leavingDate = req.query.LeavingDate
             }
-            date = "2019-03-21"
-            time = "22:22"
-            getTrainInfoFromStationCode(response.station_code, date, time, (error, response) => {
+            else {
+              now = new Date()
+              month = now.getMonth()+1
+              if (month < 10) {
+                month = "0"+month;
+              }
+              day = now.getDate()+1
+              if (day < 10) {
+                day = "0"+day;
+              }
+              leavingDate = `${now.getFullYear()}-${month}-${day}`
+            }
+            // Following code sets the leavingTime.
+            let leavingTime;
+            if (req.query.LeavingTime) {
+              leavingTime = req.query.LeavingTime
+            }
+            else {
+              now = new Date()
+              leavingTime = `${now.getHours()}:${now.getMinutes()}`
+            }
+            console.log("The date is "+leavingDate+"   and the time is "+leavingTime)
+            // Following code gets the train info.
+            getTrainInfoFromStationCode(response.station_code, leavingDate, leavingTime, (error, response) => {
                 if (error) {
                     return console.log(error);
                 }
