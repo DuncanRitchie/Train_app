@@ -44,7 +44,15 @@ app.get("/train", (req, res) => {
             }
             else {
               now = new Date()
-              leavingTime = `${now.getHours()}:${now.getMinutes()}`
+              hour = now.getHours()
+              if (hour < 10) {
+                hour = "0"+hour;
+              }
+              minute = now.getMinutes()
+              if (minute < 10) {
+                minute = "0"+minute;
+              }
+              leavingTime = `${hour}:${minute}`
             }
             console.log("The date is "+leavingDate+"   and the time is "+leavingTime)
             // Following code gets the train info.
