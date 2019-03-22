@@ -2,9 +2,9 @@ const request = require("request")
 const express = require("express");
 
 
-const getTicketFares = (station_from, station_to, callback) => {
+const getTicketFares = (station_code_from, station_code_to, callback) => {
     
-    let url = `http://api.brfares.com/querysimple?orig=${station_from}&dest=${station_to}`;
+    let url = `http://api.brfares.com/querysimple?orig=${station_code_from}&dest=${station_code_to}`;
     request({ url, json: true }, (error, response) => {
         if (error) {
             callback("Unable to connect to train services!", undefined);
