@@ -8,11 +8,11 @@ const getTicketFares = (station_from, station_to, callback) => {
     request({ url, json: true }, (error, response) => {
         if (error) {
             callback("Unable to connect to train services!", undefined);
-        } else if (response.body.fares.fare === 0) {
+        } else if (response.body.fares[0].adult.length === 0) {
             callback("Unable to find station. Try another search.", undefined);
         } else {
             callback(undefined, {
-                fares: response.body.fares.fare
+                fares: response.body.fares[0].adult.fare
             });
         }
     })
