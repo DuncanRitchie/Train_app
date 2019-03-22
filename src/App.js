@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Home from './components/home/Home';
 import HeaderBar from './components/home/HeaderBar';
+import MenuBar from './components/home/MenuBar';
 import ResultPage from './components/home/ResultPage';
-import NewsPage from './components/service-news/NewsPage'
+import NewsPage from './components/service-news/NewsPage';
+import StationPage from './components/stationinfo/StationPage';
 import './App.css';
 
 class App extends Component {
@@ -51,6 +53,9 @@ class App extends Component {
 
         <ResultPage/>
         <NewsPage/>
+        <StationPage/>
+
+        <MenuBar/>
           
       </div>
     );
