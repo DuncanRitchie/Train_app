@@ -1,0 +1,8 @@
+.stationInfo-card {
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    background-color: #F5F5F5;
+    box-shadow: 2px 2px 2px #ccc;
+    margin-bottom: 10px;
+}
