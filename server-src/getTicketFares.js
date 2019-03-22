@@ -19,6 +19,3 @@ const getTicketFares = (station_code_from, station_code_to, callback) => {
 }
 
 module.exports = getTicketFares
-
-
-
