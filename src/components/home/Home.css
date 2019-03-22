@@ -1,10 +1,54 @@
-
-input {
-    border: 1px solid #3A4750;
-}
-
 form {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
+    text-align: left;
 }
+
+.form-input {
+    padding: 10px 8px;
+    border: 2px solid #3A4750;
+    border-radius: 25px;
+    margin: 10px 0;
+}
+
+
+.time-info input {
+    width: 45%;
+    margin-right:16px;
+
+}
+
+.time-info select {
+    width: 45%;
+    margin-right: 0;
+}
+
+.time-info input[type=checkbox] {
+    width: 15px;
+    margin: 5px;
+}
+
+.count-container {
+    display: flex;
+    justify-content: space-between
+}
+
+.count {
+    margin-left: 15px;
+    border: none;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+#submit-btn {
+    width: 200px;
+    background-color: #00ADB5;
+    color: #eee;
+    border: none;
+    border-radius: 100px;
+    padding: 10px;
+    margin: 20px;
+    align-self: center;
+}
+

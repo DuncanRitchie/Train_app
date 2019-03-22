@@ -6,36 +6,40 @@ const Home = (props) => {
     return (
         <div id="journeyplanner">
             <form onSubmit={props.handlSubmit}>
-                <p>Where from?</p>
-                <input type="text" name="fromStation" value={fromStationValue} placeholder="Station/Postcode" onChange={(e)=>handleChangeFrom(e)}/>
-                <p>Where to?</p>
-                <input type="text" name="toStation" value={toStationValue}  placeholder="Station/Postcode" onChange={(e)=>handleChangeTo(e)}/>
-
-                <select name="Status" onChange={(e)=>handleChangeStatus(e)}>
-                    <option value="Leaving">Leaving</option>
-                    <option value="Arriving">Arriving</option>
-                </select>
-                <input type="date" name="LeavingDate" value={leavingDate} placeholder="Today" onChange={(e)=>handleChangeDate(e)}/>
-                <input type="time" name="LeavingTime" value={leavingTime}  placeholder="Time" onChange={(e)=>handleChangeTime(e)}/>
+                <label>Where from?</label>
+                <input class="form-input" type="text" name="fromStation" value={fromStationValue} placeholder="Station/Postcode" onChange={(e)=>handleChangeFrom(e)}/>
+                <label>Where to?</label>
+                <input class="form-input" type="text" name="toStation" value={toStationValue}  placeholder="Station/Postcode" onChange={(e)=>handleChangeTo(e)}/>
                 
-                <input type="checkbox" name="returning?" value={returning} onChange={(e)=>checkReturn(e)}/>
-
-                {props.checkReturn === true ? (
-                    <span>
-                    <select name="Status" onChange={(e)=>props.handleChangeReturnStatus(e)}>
-                        <option value="Leaving">Leaving</option>
-                        <option value="Arriving">Arriving</option>
+                <span class='time-info'>
+                    <input class="form-input" type="date" name="LeavingDate" value={leavingDate} placeholder="Today" onChange={(e)=>handleChangeDate(e)}/>
+                    <select class="form-input" name="Status" onChange={(e)=>handleChangeStatus(e)}>
+                        <option value="LeavingAfter">Leaving After</option>
+                        <option value="ArrivingBefore">Arriving Before</option>
                     </select>
-                    <input type="date" name="ReturningDate" value={returningDate}  placeholder="Tomorrow" onChange={(e)=>handleChangeReturnDate(e)}/>
-                    <input type="time" name="ReturningTime" value={returningTime}  placeholder="Time" onChange={(e)=>handleChangeReturnTime(e)}/></span>
+                    <input class="form-input" type="time" name="LeavingTime" value={leavingTime}  placeholder="Time" onChange={(e)=>handleChangeTime(e)}/>
+                    <span><input type="checkbox" name="returning?" value={returning} onChange={(e)=>checkReturn(e)}/><label>Return?</label></span>
+                </span>
+
+                
+
+                {props.returning === true ? (
+                    <span class='time-info'>
+                    <input class="form-input" type="date" name="ReturningDate" value={returningDate}  placeholder="Tomorrow" onChange={(e)=>handleChangeReturnDate(e)}/>
+                    <select class="form-input"name="Status" onChange={(e)=>props.handleChangeReturnStatus(e)}>
+                        <option value="LeavingAfter">Leaving After</option>
+                        <option value="ArrivingBefore">Arriving Before</option>
+                    </select>
+                    
+                    <input class="form-input" type="time" name="ReturningTime" value={returningTime}  placeholder="Time" onChange={(e)=>handleChangeReturnTime(e)}/></span>
                 ) : (
                     <span></span>
                 )}
 
-                <p>adult: <input type="number" min='1' max='5' name='adultcounter' value={adultCount} onChange={(e)=>handleChangeCountAdult(e)}/></p>
-                <p>children: <input type="number" min='0' max='5' name='kidscounter' value={childCount} onChange={(e)=>handleChangeCountChild(e)}/></p>
+                <span class="count-container"><label>adult:</label> <input class="count" type="number" min='1' max='5' name='adultcounter' value={adultCount} onChange={(e)=>handleChangeCountAdult(e)}/></span>
+                <span class="count-container"><label>children:</label> <input class="count" type="number" min='0' max='5' name='kidscounter' value={childCount} onChange={(e)=>handleChangeCountChild(e)}/></span>
 
-                <button onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
+                <button id="submit-btn"onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
             </form>
         </div>
     )
