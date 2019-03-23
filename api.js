@@ -8,7 +8,7 @@ const getTrainInfoFromStationCode = require("./server-src/getTrainInfo")
 const getTicketFares = require("./server-src/getTicketFares")
 const getNewsFromStationCode = require("./server-src/getNews")
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const publicDirectory = path.join(__dirname, "../public");
 app.use(express.static(publicDirectory));
