@@ -1,25 +1,24 @@
 {
-  "name": "train_app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "api.js",
-  "dependencies": {
-    "async": "^2.6.2",
-    "express": "^4.16.4",
-    "request": "^2.88.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jacobzielinski/Train_app.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jacobzielinski/Train_app/issues"
-  },
-  "homepage": "https://github.com/jacobzielinski/Train_app#readme"
+    "name": "train_app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "api.js",
+    "dependencies": {
+        "express": "^4.16.4",
+        "request": "^2.88.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jacobzielinski/Train_app.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jacobzielinski/Train_app/issues"
+    },
+    "homepage": "https://github.com/jacobzielinski/Train_app#readme"
 }
