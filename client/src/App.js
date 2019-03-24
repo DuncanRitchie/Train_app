@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Home from './components/home/Home';
-import HeaderBar from './components/home/HeaderBar';
 import MenuBar from './components/home/MenuBar';
 import ResultPage from './components/home/ResultPage';
 import NewsPage from './components/service-news/NewsPage';
@@ -33,7 +32,8 @@ class App extends Component {
         chosenFromStation: '',
         chosenToStation: '',
         chooseToStations: [],
-        pageDisplayed: "home"
+        pageDisplayed: "home",
+        searchBar: ""
     }
 
     handleChange = ({ target }) => {
@@ -99,46 +99,42 @@ class App extends Component {
 
     render() {
 
-        const { chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount } = this.state
-        return ( <
-            div className = "App" >
-            <
-            HeaderBar title = "live times & tickets" / >
-            <
-            Home fromStation = { fromStation }
-            toStation = { toStation }
-            leavingDate = { leavingDate }
-            departingStatus = { departingStatus }
-            leavingTime = { leavingTime }
-            returnCheck = { returnCheck }
-            returningDate = { returningDate }
-            returningStatus = { returningStatus }
-            returningTime = { returningTime }
-            adultCount = { adultCount }
-            childCount = { childCount }
-            chooseFromStations = { chooseFromStations }
-            chooseToStations = { chooseToStations }
-            handleSelectFromStation = { this.handleSelectFromStation }
-            handleSelectToStation = { this.handleSelectToStation }
-            handleChange = { this.handleChange }
-            handleChangeFromStation = { this.handleChangeFromStation }
-            handleChangeToStation = { this.handleChangeToStation }
-            handleSubmit = { this.handleSubmit }
-            />
+        const { chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+            return ( <div className = "App" >
+                {
+// This is an object describing the three pages, which of which is rendered is determined by state.pageDisplayed 
+                    {
+                        home: 
+                            <div>
+    {/* This is a ternary operator deciding whether to render the home form or the results */}
+                                {outbound ? <Home fromStation = { fromStation }
+                                toStation = { toStation }
+                                leavingDate = { leavingDate }
+                                departingStatus = { departingStatus }
+                                leavingTime = { leavingTime }
+                                returnCheck = { returnCheck }
+                                returningDate = { returningDate }
+                                returningStatus = { returningStatus }
+                                returningTime = { returningTime }
+                                adultCount = { adultCount }
+                                childCount = { childCount }
+                                chooseFromStations = { chooseFromStations }
+                                chooseToStations = { chooseToStations }
+                                handleSelectFromStation = { this.handleSelectFromStation }
+                                handleSelectToStation = { this.handleSelectToStation }
+                                handleChange = { this.handleChange }
+                                handleChangeFromStation = { this.handleChangeFromStation }
+                                handleChangeToStation = { this.handleChangeToStation }
+                                handleSubmit = { this.handleSubmit }/> : <ResultPage />}
+                            </div>,
+                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>,
+                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>
+                    }[pageDisplayed]
+                }
+                
+            <MenuBar handlePageDisplayed = { this.handlePageDisplayed }/>
 
-            <
-            ResultPage / >
-            <
-            NewsPage / >
-            <
-            StationPage / >
-
-            <
-            MenuBar handlePageDisplayed = { this.handlePageDisplayed }
-            / >
-
-            <
-            /div>
+            </div>
         );
     }
 }
