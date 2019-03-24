@@ -1,10 +1,12 @@
 import React from 'react';
 import './Home.css';
+import HeaderBar from './HeaderBar'
 
 const Home = (props) => {
     const { handleSelectToStation, handleSelectFromStation, chooseFromStations, chooseToStations, handleChangeToStation, handleChangeFromStation, fromStation, toStation, leavingDate, leavingTime, returnCheck, returningDate, returningTime, adultCount, childCount, handleChange} = props
     return (
         <div className="journeyplanner">
+            <HeaderBar title="live times &amp; tickets" />
             <form action="" method="" onSubmit={props.handleSubmit}>
                 <label>Where from?</label>
                 <input className="form-input" type="text" name="fromStation" value={fromStation} required placeholder="Station/Postcode" onChange={(e)=>handleChangeFromStation(e)}/>

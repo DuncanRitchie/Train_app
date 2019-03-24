@@ -4,9 +4,9 @@ import './MenuBar.css'
 const MenuBar = (props) => {
     return (
         <ul className="nav-bar">
-            <li><a className="nav-link" href="#">news</a></li>
-            <li><a className="nav-link" href="#">home</a></li>
-            <li><a className="nav-link" href="#">station</a></li>
+            <li><a className="nav-link" onClick={()=>props.handlePageDisplayed("news")}>news</a></li>
+            <li><a className="nav-link" onClick={()=>props.handlePageDisplayed("home")}>home</a></li>
+            <li><a className="nav-link" onClick={()=>props.handlePageDisplayed("station")}>station</a></li>
         </ul>
     )
 }
