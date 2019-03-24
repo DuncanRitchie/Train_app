@@ -2,7 +2,7 @@ const request = require("request");
 const express = require("express");
 
 const getNewsFromStationCode = (station_code, callback) => {
-    let url = `https://transportapi.com/v3/uk/train/station/${station_code}/live.json?app_id=06fa4af4&app_key=131158f245f478626a1f8c44a1927eec&darwin=false&train_status=passenger`;
+    let url = `https://transportapi.com/v3/uk/train/station/${station_code}/live.json?app_id=fea7751f&app_key=702c5fbff7c11ddaa834da79ac4e6ddf&darwin=false&train_status=passenger`;
     request({ url, json: true }, (error, response) => {
         if (error) {
             callback("Unable to connect to train services!", undefined);
