@@ -97,6 +97,16 @@ class App extends Component {
         this.setState({ pageDisplayed: page })
     }
 
+    componentDidMount() {
+        console.log(window.location.pathname)
+        if (window.location.pathname.substr(0,5) === "/news") {
+            this.setState({pageDisplayed: "news"})
+        }
+        else if (window.location.pathname.substr(0,8) === "/station") {
+            this.setState({pageDisplayed: "station"})
+        }
+    }
+
     render() {
 
         const { chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
