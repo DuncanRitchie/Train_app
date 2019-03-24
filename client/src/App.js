@@ -6,6 +6,14 @@ import ResultPage from './components/home/ResultPage';
 import NewsPage from './components/service-news/NewsPage';
 import StationPage from './components/stationinfo/StationPage';
 import './App.css';
+import {debounce} from 'debounce';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
+
+const searchFromAPI = (fromStationParam) => fetch ('http://localhost:3001/chooseFromStation?fromStation=' + fromStationParam)
+const searchToAPI = (toStationParam) => fetch ('http://localhost:3001/chooseToStation?toStation=' + toStationParam)
+
+const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 3000);
+const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 3000);
 
 class App extends Component {
     state = {
@@ -35,14 +43,19 @@ class App extends Component {
       })
     }
 
+    asyncFromStation = async () => {
+        if (this.state.fromStation) {
+          const {stations} =  await searchAPIDebounced(this.state.fromStation)
+          .then((response) => response.json())
+          this.setState({chooseFromStations: stations})
+        }
+    }
+
     handleChangeFromStation = (e) => {
       this.setState({
         fromStation: e.target.value
-      }, async () => {
-        const {stations} = await fetch ('http://localhost:3001/chooseFromStation?fromStation=' + this.state.fromStation)
-          .then((response) => response.json())
-          this.setState({chooseFromStations: stations})
-      })
+      }, this.asyncFromStation )
+      
     }
     
     handleSelectFromStation = (e) =>{
@@ -57,20 +70,24 @@ class App extends Component {
       })
     }
 
+    asyncToStation = async () => {
+      if (this.state.toStation) {
+        const {stations} =  await searchToAPIDebounced(this.state.toStation)
+        .then((response) => response.json())
+        this.setState({chooseToStations: stations})
+      } 
+    }
+
     handleChangeToStation = (e) => {
       this.setState({
         toStation: e.target.value
-      }, async () => {
-        const {stations} = await fetch ('http://localhost:3001/chooseToStation?toStation=' + this.state.toStation)
-          .then((response) => response.json())
-          this.setState({chooseToStations: stations})
-      })
+      }, this.asyncToStation)
     }
 
     handleSubmit = (e) => {
       console.log('submited')
       e.preventDefault()
-      fetch('http://localhost:3001/train?fromStation=' + this.state.fromStation + '&toStation=' + this.state.toStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
+      fetch('http://localhost:3001/train?chosenFromStation=' + this.state.chosenFromStation + '&chosenToStation=' + this.state.chosenToStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
         .then((response) => console.log(response))
         .then((outbound) => ({outbound}))
     }

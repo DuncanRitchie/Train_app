@@ -5,6 +5,7 @@
   "main": "api.js",
   "dependencies": {
     "cors": "^2.8.5",
+    "debounce": "^1.2.0",
     "express": "^4.16.4",
     "request": "^2.88.0"
   },

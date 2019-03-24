@@ -24,7 +24,7 @@ const Home = (props) => {
                     <option>choose your destination station</option>
                     {chooseToStations.map((station) => {
                         return (
-                            <option key={station.station_code} value={station.station_code}>{station.name}</option>
+                            <option key={station.station_code} value={station.name}>{station.name}</option>
                         )
                     })}
                 </select>
