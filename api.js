@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors")
 const app = express();
+const request = require('request')
 
 const getStationCodeFromSearch = require("./server-src/getStationCode")
 const getStationsFromSearch = require("./server-src/getStations")
@@ -12,8 +14,11 @@ const port = process.env.PORT || 3001;
 
 const publicDirectory = path.join(__dirname, "../public");
 app.use(express.static(publicDirectory));
+app.use(cors())
+
 
 app.get("/train", (req, res) => {
+console.log(req.query)
     if (!req.query.fromStation) {
         res.send("Please provide fromStation");
     } else {
@@ -30,8 +35,8 @@ app.get("/train", (req, res) => {
                 // Following code sets the leavingDate.
                 let leavingDate;
                 let now;
-                if (req.query.LeavingDate) {
-                leavingDate = req.query.LeavingDate
+                if (req.query.leavingDate) {
+                leavingDate = req.query.leavingDate
                 }
                 else {
                 now = new Date()
@@ -47,8 +52,8 @@ app.get("/train", (req, res) => {
                 }
                 // Following code sets the leavingTime.
                 let leavingTime;
-                if (req.query.LeavingTime) {
-                leavingTime = req.query.LeavingTime
+                if (req.query.leavingTime) {
+                leavingTime = req.query.leavingTime
                 }
                 else {
                 now = new Date()
@@ -83,6 +88,37 @@ app.get("/train", (req, res) => {
         });
     }
 })
+
+app.get('/chooseFromStation', (req, res) => {
+    if (!req.query.fromStation) {
+        console.log('error')
+        res.send('Please provide a station name')
+    
+    } else  {
+        let url = `http://transportapi.com/v3/uk/places.json?query=${req.query.fromStation}&type=train_station&app_id=06fa4af4&app_key=131158f245f478626a1f8c44a1927eec`
+        request({url, json: true}, (error, response) => {
+            console.log(response.body.member)
+            res.send({stations: response.body.member})
+            }
+        )
+    }
+})
+
+app.get('/chooseToStation', (req, res) => {
+    if (!req.query.toStation) {
+        console.log('error')
+        res.send('Please provide a station name')
+    
+    } else  {
+        let url = `http://transportapi.com/v3/uk/places.json?query=${req.query.toStation}&type=train_station&app_id=06fa4af4&app_key=131158f245f478626a1f8c44a1927eec`
+        request({url, json: true}, (error, response) => {
+            console.log(response.body.member)
+            res.send({stations: response.body.member})
+            }
+        )
+    }
+})
+
 
 app.get("/station", (req, res) => {
     if (!req.query.address) {

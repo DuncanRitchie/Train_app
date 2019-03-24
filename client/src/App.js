@@ -19,7 +19,12 @@ class App extends Component {
       returningStatus:'',
       returningTime:'', 
       adultCount:1, 
-      childCount:0
+      childCount:0,
+      outbound:[],
+      chooseFromStations: [],
+      chosenFromStation: '',
+      chosenToStation: '',
+      chooseToStations: [],
     }
   
     handleChange = ({target}) => {
@@ -30,9 +35,49 @@ class App extends Component {
       })
     }
 
+    handleChangeFromStation = (e) => {
+      this.setState({
+        fromStation: e.target.value
+      }, async () => {
+        const {stations} = await fetch ('http://localhost:3001/chooseFromStation?fromStation=' + this.state.fromStation)
+          .then((response) => response.json())
+          this.setState({chooseFromStations: stations})
+      })
+    }
+    
+    handleSelectFromStation = (e) =>{
+      this.setState({
+        chosenFromStation: e.target.value
+      })
+    }
+
+    handleSelectToStation = (e) =>{
+      this.setState({
+        chosenToStation: e.target.value
+      })
+    }
+
+    handleChangeToStation = (e) => {
+      this.setState({
+        toStation: e.target.value
+      }, async () => {
+        const {stations} = await fetch ('http://localhost:3001/chooseToStation?toStation=' + this.state.toStation)
+          .then((response) => response.json())
+          this.setState({chooseToStations: stations})
+      })
+    }
+
+    handleSubmit = (e) => {
+      console.log('submited')
+      e.preventDefault()
+      fetch('http://localhost:3001/train?fromStation=' + this.state.fromStation + '&toStation=' + this.state.toStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
+        .then((response) => console.log(response))
+        .then((outbound) => ({outbound}))
+    }
+
   render() {
     
-    const { fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount } = this.state
+    const { chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount } = this.state
     return (
       <div className="App">
         <HeaderBar title="live times & tickets"/>
@@ -48,7 +93,14 @@ class App extends Component {
           returningTime={returningTime}
           adultCount={adultCount}
           childCount={childCount}
+          chooseFromStations={chooseFromStations}
+          chooseToStations={chooseToStations}
+          handleSelectFromStation={this.handleSelectFromStation}
+          handleSelectToStation={this.handleSelectToStation}
           handleChange = {this.handleChange}
+          handleChangeFromStation = {this.handleChangeFromStation}
+          handleChangeToStation = {this.handleChangeToStation}
+          handleSubmit = {this.handleSubmit}
         />
 
         <ResultPage/>
