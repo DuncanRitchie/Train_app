@@ -120,16 +120,11 @@ class App extends Component {
     }
 
     componentDidMount() {
-        // let now;
-        // let month;
-        // let day;
-        // let hour;
-        // let minute;
-        // let tomorrow;
+        let now, month, day, hour, minute, tomorrow;
         // Set the initial leavingDate
-        if (this.state.leavingDate === "") {
-            let now = new Date()
-            let month = now.getMonth() + 1
+        if (this.state.leavingDate === undefined) {
+            now = new Date()
+            month = now.getMonth() + 1
             if (month < 10) {
                 month = "0" + month;
             }
@@ -141,9 +136,9 @@ class App extends Component {
         }
 
         // Set the initial leavingTime
-        if (this.state.leavingTime === "") {
-            let now = new Date()
-            let hour= now.getHours()
+        if (this.state.leavingTime === undefined) {
+            now = new Date()
+            hour= now.getHours()
             if (hour < 10) {
                 hour = "0" + hour;
             }
@@ -155,25 +150,23 @@ class App extends Component {
         }
 
         // Set the initial returningDate
-        // if (this.state.returningDate === "") {
-         
-        //     let now = new Date()
-        //     let tomorrow = now + 3600000
-        //     let month = tomorrow.getMonth() + 1
-        //     if (month < 10) {
-        //         month = "0" + month;
-        //     }
-        //     let day = tomorrow.getDate() + 1
-        //     if (day < 10) {
-        //         day = "0" + day;
-        //     }
-        //     this.setState({returningDate: `${tomorrow.getFullYear()}-${month}-${day}`})
-        // }
+        if (this.state.returningDate === undefined) {
+            tomorrow = new Date() + 1
+            month = tomorrow.getMonth() + 1
+            if (month < 10) {
+                month = "0" + month;
+            }
+            day = tomorrow.getDate() + 1
+            if (day < 10) {
+                day = "0" + day;
+            }
+            this.setState({returningDate: `${now.getFullYear()}-${month}-${day}`})
+        }
             
-        // // Set the initial returningTime
-        if (this.state.returningTime === "") {
-            let now = new Date()
-            let hour= now.getHours()
+        // Set the initial returningTime
+        if (this.state.returningTime === undefined) {
+            now = new Date()
+            hour= now.getHours()
             if (hour < 10) {
                 hour = "0" + hour;
             }
