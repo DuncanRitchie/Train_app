@@ -10,8 +10,8 @@ import AwesomeDebouncePromise from 'awesome-debounce-promise';
 const searchFromAPI = (origin) => fetch('/getStationList?placeName=' + origin)
 const searchToAPI = (destination) => fetch('/getStationList?placeName=' + destination)
 
-const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 3000);
-const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 3000);
+const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 1500);
+const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 1500);
 
 class App extends Component {
     state = {
@@ -97,15 +97,15 @@ class App extends Component {
         this.setState({ pageDisplayed: page })
     }
 
-    componentDidMount() {
-        console.log(window.location.pathname)
-        if (window.location.pathname.substr(0,5) === "/news") {
-            this.setState({pageDisplayed: "news"})
-        }
-        else if (window.location.pathname.substr(0,8) === "/station") {
-            this.setState({pageDisplayed: "station"})
-        }
-    }
+    // componentDidMount() {
+    //     console.log(window.location.pathname)
+    //     if (window.location.pathname.substr(0,5) === "/news") {
+    //         this.setState({pageDisplayed: "news"})
+    //     }
+    //     else if (window.location.pathname.substr(0,8) === "/station") {
+    //         this.setState({pageDisplayed: "station"})
+    //     }
+    // }
 
     render() {
 
