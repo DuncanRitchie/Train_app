@@ -139,8 +139,8 @@ class App extends Component {
                                 handleSubmit = { this.handleSubmit }/> : 
                                 <ResultPage searchResults={outbound} />}
                             </div>,
-                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>,
-                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>
+                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleSearch} searchBar={searchBar}/>,
+                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleSearch} searchBar={searchBar}/>
                     }[pageDisplayed]
                 }
 
