@@ -93,7 +93,7 @@ class App extends Component {
     }
 
     handlePageDisplayed = (page) => {
-        window.location = page;
+        // window.location = page;
         this.setState({ pageDisplayed: page })
     }
 
