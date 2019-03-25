@@ -4,8 +4,8 @@ import './NewsCard.css';
 const NewsCard = (props) => {
     return (
         <div className='news-card'>
-            <h4>{props.newsTitle}</h4>
-            <p>{props.newsDescription}</p>
+            <h4>{props.lateTrainOperator}</h4>
+            <p>{props.trainService}</p>
         </div>
     )
 }
