@@ -9,7 +9,7 @@ const Home = (props) => {
             <HeaderBar title="live times &amp; tickets" />
             <form action="" method="" onSubmit={props.handleSubmit}>
                 <label>Where from?</label>
-                <input className="form-input" type="text" name="fromStation" value={fromStation} required placeholder="Station/Postcode" onChange={(e)=>handleChangeFromStation(e)}/>
+                <input className="form-input" type="text" name="fromStation" value={fromStation} required placeholder="Station" onChange={(e)=>handleChangeFromStation(e)}/>
                 <label>Choose Origin Station</label>
                 <select onChange={(e) => handleSelectFromStation(e)}>
                     <option>choose your origin station</option>
@@ -20,7 +20,7 @@ const Home = (props) => {
                     })}
                 </select>
                 <label>Where to?</label>
-                <input className="form-input" type="text" name="toStation" value={toStation} required placeholder="Station/Postcode" onChange={(e)=>handleChangeToStation(e)}/>
+                <input className="form-input" type="text" name="toStation" value={toStation} required placeholder="Station" onChange={(e)=>handleChangeToStation(e)}/>
                 <label>Choose Destination Station</label>
                 <select onChange={(e) => handleSelectToStation(e)}>
                     <option>choose your destination station</option>
