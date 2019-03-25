@@ -6,6 +6,7 @@ const getNewsFromStationCode = (station_code, callback) => {
         if (error) {
             callback("Unable to connect to train services!", undefined);
         } else if (response.body.departures.all.length === 0) {
+            console.log(response.body.departures.all)
             callback("Unable to find news. Try another search.", undefined);
         } else {
             // let delayedTrains = response.body.departures.all.filter((delayedTrain) => {

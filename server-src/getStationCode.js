@@ -10,7 +10,7 @@ const getStationCodeFromSearch = (query, callback) => {
         } else {
             console.log("Station code: " + response.body.member[0].station_code)
             callback(undefined, {
-                stations: response.body.member[0].station_code
+                station_code: response.body.member[0].station_code
             });
         }
     })
