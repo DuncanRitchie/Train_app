@@ -119,19 +119,37 @@ class App extends Component {
         this.setState({ pageDisplayed: page, searchBar: '' })
     }
 
-    // componentDidMount() {
-    //     console.log(window.location.pathname)
-    //     if (window.location.pathname.substr(0,5) === "/news") {
-    //         this.setState({pageDisplayed: "news"})
-    //     }
-    //     else if (window.location.pathname.substr(0,8) === "/station") {
-    //         this.setState({pageDisplayed: "station"})
-    //     }
-    // }
+    componentDidMount() {
+        // The following changes the page rendered if the address suggests to.
+        // console.log(window.location.pathname)
+        // if (window.location.pathname.substr(0,5) === "/news") {
+        //     this.setState({pageDisplayed: "news"})
+        // }
+        // else if (window.location.pathname.substr(0,8) === "/station") {
+        //     this.setState({pageDisplayed: "station"})
+        }
+    }
 
     render() {
 
+
         const { stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+
+        // Set the initial leavingDate
+        if (leavingDate === "") {
+            now = new Date()
+            month = now.getMonth() + 1
+            if (month < 10) {
+                month = "0" + month;
+            }
+            day = now.getDate() + 1
+            if (day < 10) {
+                day = "0" + day;
+            }
+            this.setState({leavingDate: `${now.getFullYear()}-${month}-${day}`})
+        }
+
+
             return ( <div className = "App" >
                 {
 // This is an object describing the three pages, which of which is rendered is determined by state.pageDisplayed 

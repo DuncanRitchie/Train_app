@@ -10,7 +10,7 @@ const Home = (props) => {
             <form action="" method="" onSubmit={props.handleSubmit}>
                 <label>Where from?</label>
                 <input className="form-input" type="text" name="fromStation" value={fromStation} required placeholder="Station/Postcode" onChange={(e)=>handleChangeFromStation(e)}/>
-                <label>Choose Station</label>
+                <label>Choose Origin Station</label>
                 <select onChange={(e) => handleSelectFromStation(e)}>
                     <option>choose your origin station</option>
                     {chooseFromStations.map((station) => {
