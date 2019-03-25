@@ -94,7 +94,7 @@ class App extends Component {
 
     handlePageDisplayed = (page) => {
         // window.location = page;
-        this.setState({ pageDisplayed: page })
+        this.setState({ pageDisplayed: page, searchBar: '' })
     }
 
     // componentDidMount() {
