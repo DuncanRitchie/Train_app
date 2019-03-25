@@ -13,7 +13,7 @@
   "devDependencies": {},
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "concurrently \"react-scripts start\" \"node api.js\"",
+    "start": "node api.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"react-scripts start\" \"node api.js\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
