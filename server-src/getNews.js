@@ -9,12 +9,10 @@ const getNewsFromStationCode = (station_code, callback) => {
             console.log(response.body.departures.all)
             callback("Unable to find news. Try another search.", undefined);
         } else {
-            // let delayedTrains = response.body.departures.all.filter((delayedTrain) => {
-            //     return delayedTrain.status === 'Late'
-            // })
-            callback(undefined, {
-                news: response.body.departures.all
-            });
+            let delayedTrains = response.body.departures.all.filter((delayedTrain) => {
+                return delayedTrain.status === 'LATE'
+            })
+            callback(undefined, delayedTrains);
         }
     });
 };
