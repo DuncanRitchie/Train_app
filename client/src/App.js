@@ -152,7 +152,7 @@ class App extends Component {
         // Set the initial returningDate
         if (this.state.returningDate === "") {
             tomorrow = new Date()
-            tomorrow += 3600000
+            tomorrow.setDate(tomorrow.getDate()+1)
             month = tomorrow.getMonth() + 1
             if (month < 10) {
                 month = "0" + month;
