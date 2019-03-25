@@ -7,8 +7,8 @@ import StationPage from './components/stationinfo/StationPage';
 import './App.css';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
-const searchFromAPI = (origin) => fetch('http://localhost:3001/getStationList?placeName=' + origin)
-const searchToAPI = (destination) => fetch('http://localhost:3001/getStationList?placeName=' + destination)
+const searchFromAPI = (origin) => fetch('https://stormy-cove-91172.herokuapp.com/getStationList?placeName=' + origin)
+const searchToAPI = (destination) => fetch('https://stormy-cove-91172.herokuapp.com/getStationList?placeName=' + destination)
 
 const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 1500);
 const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 1500);
@@ -90,14 +90,14 @@ class App extends Component {
         const {fromStation, chosenFromStation, chosenToStation, leavingDate, leavingTime} = this.state
         console.log('form submitted')
         e.preventDefault()
-        fetch('http://localhost:3001/train?fromStation=' + fromStation +'&chosenFromStation=' + chosenFromStation + '&chosenToStation=' + chosenToStation + '&leavingDate=' + leavingDate + '&leavingTime=' + leavingTime)
+        fetch('https://stormy-cove-91172.herokuapp.com/train?fromStation=' + fromStation +'&chosenFromStation=' + chosenFromStation + '&chosenToStation=' + chosenToStation + '&leavingDate=' + leavingDate + '&leavingTime=' + leavingTime)
             .then((response) => response.json())
             .then((data) => this.setState({ outbound: data.allDepartures }))
     }
 
     handleSearch = (e) => {
         const {searchBar} = this.state
-        fetch('http://localhost:3001/news?address=' + searchBar)
+        fetch('https://stormy-cove-91172.herokuapp.com/news?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({news: data.news}))
     }

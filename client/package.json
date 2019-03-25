@@ -30,5 +30,5 @@
     "devDependencies": {},
     "author": "",
     "license": "ISC",
-    "proxy": "http://localhost:3001"
+    "proxy": "https://stormy-cove-91172.herokuapp.com"
 }
