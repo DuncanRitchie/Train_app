@@ -1,11 +1,11 @@
 import React from 'react';
-// import './SearchBar.css';
+import './SearchBtn.css';
 
 const SearchBtn = (props) => {
     const {handleSearchNews} = props
     return (
         <div className="search-btn">
-            <button onClick={handleSearchNews}>Search</button>
+            <button className="search-btn" onClick={handleSearchNews}>Search</button>
         </div>
     )
 }
