@@ -120,8 +120,9 @@ class App extends Component {
     }
 
     componentDidMount() {
+        let now, month, day, hour, minute, tomorrow;
         // Set the initial leavingDate
-        if (this.state.leavingDate === "") {
+        if (this.state.leavingDate === undefined) {
             now = new Date()
             month = now.getMonth() + 1
             if (month < 10) {
@@ -135,7 +136,7 @@ class App extends Component {
         }
 
         // Set the initial leavingTime
-        if (this.state.leavingTime === "") {
+        if (this.state.leavingTime === undefined) {
             now = new Date()
             hour= now.getHours()
             if (hour < 10) {
@@ -149,9 +150,8 @@ class App extends Component {
         }
 
         // Set the initial returningDate
-        if (this.state.returningDate === "") {
-            tomorrow = new Date()
-            tomorrow += 3600000
+        if (this.state.returningDate === undefined) {
+            tomorrow = new Date() + 1
             month = tomorrow.getMonth() + 1
             if (month < 10) {
                 month = "0" + month;
@@ -164,7 +164,7 @@ class App extends Component {
         }
             
         // Set the initial returningTime
-        if (this.state.returningTime === "") {
+        if (this.state.returningTime === undefined) {
             now = new Date()
             hour= now.getHours()
             if (hour < 10) {
