@@ -7,8 +7,8 @@ import StationPage from './components/stationinfo/StationPage';
 import './App.css';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
-const searchFromAPI = (origin) => fetch('/getStationList?placeName=' + origin)
-const searchToAPI = (destination) => fetch('/getStationList?placeName=' + destination)
+const searchFromAPI = (origin) => fetch('http://localhost:3001/getStationList?placeName=' + origin)
+const searchToAPI = (destination) => fetch('http://localhost:3001/getStationList?placeName=' + destination)
 
 const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 1500);
 const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 1500);
@@ -26,11 +26,13 @@ class App extends Component {
         returningTime: '',
         adultCount: 1,
         childCount: 0,
-        outbound: [],
         chooseFromStations: [],
         chosenFromStation: '',
         chosenToStation: '',
         chooseToStations: [],
+        outbound: [],
+        news: [],
+        stationInfo: [],
         pageDisplayed: "home",
         searchBar: ""
     }
@@ -85,11 +87,19 @@ class App extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log('submited')
+        const {fromStation, chosenFromStation, chosenToStation, leavingDate, leavingTime} = this.state
+        console.log('form submitted')
         e.preventDefault()
-        fetch('/train?fromStation=' + this.state.fromStation +'&chosenFromStation=' + this.state.chosenFromStation + '&chosenToStation=' + this.state.chosenToStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
+        fetch('http://localhost:3001/train?fromStation=' + fromStation +'&chosenFromStation=' + chosenFromStation + '&chosenToStation=' + chosenToStation + '&leavingDate=' + leavingDate + '&leavingTime=' + leavingTime)
             .then((response) => response.json())
             .then((data) => this.setState({ outbound: data.allDepartures }))
+    }
+
+    handleSearch = (e) => {
+        const {searchBar} = this.state
+        fetch('http://localhost:3001/news?address=' + searchBar)
+            .then((response) => response.json())
+            .then((data) => this.setState({news: data.news}))
     }
 
     handlePageDisplayed = (page) => {
@@ -109,7 +119,7 @@ class App extends Component {
 
     render() {
 
-        const { chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+        const { news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
             return ( <div className = "App" >
                 {
 // This is an object describing the three pages, which of which is rendered is determined by state.pageDisplayed 
@@ -138,8 +148,8 @@ class App extends Component {
                                 handleSubmit = { this.handleSubmit }/> : 
                                 <ResultPage searchResults={outbound} />}
                             </div>,
-                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleSearch} searchBar={searchBar}/>,
-                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleSearch} searchBar={searchBar}/>
+                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearch={this.handleSearch} lateTrains={news}/>,
+                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>
                     }[pageDisplayed]
                 }
 

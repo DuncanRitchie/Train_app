@@ -7,6 +7,7 @@ const app = express();
 
 const getStationCodeFromSearch = require("./server-src/getStationCode")
 const getStationsFromSearch = require("./server-src/getStations")
+const getStationList = require("./server-src/getStationList")
 const getTrainInfoFromStationCode = require("./server-src/getTrainInfo")
 const getTicketFares = require("./server-src/getTicketFares")
 const getNewsFromStationCode = require("./server-src/getNews")
@@ -99,7 +100,7 @@ app.get('/getStationList', (req, res) => {
         res.send('Please provide a station name')
 
     } else {
-        getStationCodeFromSearch(req.query.placeName, (error, response) => {
+        getStationList(req.query.placeName, (error, response) => {
             if(error) {
                 return console.log(error)
             }
