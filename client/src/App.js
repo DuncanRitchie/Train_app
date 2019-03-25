@@ -120,6 +120,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        let now, month, day, hour, minute, tomorrow;
         // Set the initial leavingDate
         if (this.state.leavingDate === "") {
             now = new Date()
