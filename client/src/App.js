@@ -37,6 +37,7 @@ class App extends Component {
         searchBar: ""
     }
 
+    //this is onChange handle for all input 
     handleChange = ({ target }) => {
         const name = target.name
         const value = target.type === 'checkbox' ? target.checked : target.value
@@ -45,6 +46,7 @@ class App extends Component {
         })
     }
 
+    //this is the handle for station list drop down menu
     asyncFromStation = async() => {
         if (this.state.fromStation) {
             const { stations } = await searchAPIDebounced(this.state.fromStation)
@@ -66,12 +68,6 @@ class App extends Component {
         })
     }
 
-    handleSelectToStation = (e) => {
-        this.setState({
-            chosenToStation: e.target.value
-        })
-    }
-
     asyncToStation = async() => {
         if (this.state.toStation) {
             const { stations } = await searchToAPIDebounced(this.state.toStation)
@@ -85,7 +81,14 @@ class App extends Component {
             toStation: e.target.value
         }, this.asyncToStation)
     }
+    
+    handleSelectToStation = (e) => {
+        this.setState({
+            chosenToStation: e.target.value
+        })
+    }
 
+    //Submitting the form
     handleSubmit = (e) => {
         const {fromStation, chosenFromStation, chosenToStation, leavingDate, leavingTime} = this.state
         console.log('form submitted')
@@ -95,6 +98,7 @@ class App extends Component {
             .then((data) => this.setState({ outbound: data.allDepartures }))
     }
 
+    //handle the Search button for search bar
     handleSearch = (e) => {
         const {searchBar} = this.state
         fetch('http://localhost:3001/news?address=' + searchBar)
