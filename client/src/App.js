@@ -5,14 +5,13 @@ import ResultPage from './components/home/ResultPage';
 import NewsPage from './components/service-news/NewsPage';
 import StationPage from './components/stationinfo/StationPage';
 import './App.css';
-import { debounce } from 'debounce';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
-const searchFromAPI = (origin) => fetch('http://localhost:3001/getStationList?placeName=' + origin)
-const searchToAPI = (destination) => fetch('http://localhost:3001/getStationList?placeName=' + destination)
+const searchFromAPI = (origin) => fetch('/getStationList?placeName=' + origin)
+const searchToAPI = (destination) => fetch('/getStationList?placeName=' + destination)
 
-const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 3000);
-const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 3000);
+const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 1500);
+const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 1500);
 
 class App extends Component {
     state = {
@@ -88,25 +87,25 @@ class App extends Component {
     handleSubmit = (e) => {
         console.log('submited')
         e.preventDefault()
-        fetch('http://localhost:3001/train?fromStation=' + this.state.fromStation +'&chosenFromStation=' + this.state.chosenFromStation + '&chosenToStation=' + this.state.chosenToStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
+        fetch('/train?fromStation=' + this.state.fromStation +'&chosenFromStation=' + this.state.chosenFromStation + '&chosenToStation=' + this.state.chosenToStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
             .then((response) => response.json())
             .then((data) => this.setState({ outbound: data.allDepartures }))
     }
 
     handlePageDisplayed = (page) => {
-        window.location = page;
-        this.setState({ pageDisplayed: page })
+        // window.location = page;
+        this.setState({ pageDisplayed: page, searchBar: '' })
     }
 
-    componentDidMount() {
-        console.log(window.location.pathname)
-        if (window.location.pathname.substr(0,5) === "/news") {
-            this.setState({pageDisplayed: "news"})
-        }
-        else if (window.location.pathname.substr(0,8) === "/station") {
-            this.setState({pageDisplayed: "station"})
-        }
-    }
+    // componentDidMount() {
+    //     console.log(window.location.pathname)
+    //     if (window.location.pathname.substr(0,5) === "/news") {
+    //         this.setState({pageDisplayed: "news"})
+    //     }
+    //     else if (window.location.pathname.substr(0,8) === "/station") {
+    //         this.setState({pageDisplayed: "station"})
+    //     }
+    // }
 
     render() {
 
