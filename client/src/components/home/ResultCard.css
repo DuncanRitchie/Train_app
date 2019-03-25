@@ -20,7 +20,7 @@
     grid-column:3/4;
 }
 
-.duration{
+.places{
     grid-row: 3/4;
     grid-column: 1/3;
     text-align: left;

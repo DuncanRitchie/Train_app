@@ -1,9 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors")
-
-const request = require('request')
-const debounce = require('debounce')
+const dotenv = require("dotenv")
 
 const app = express();
 
@@ -18,25 +16,26 @@ const port = process.env.PORT || 3001;
 const publicDirectory = path.join(__dirname, "../public");
 app.use(express.static(publicDirectory));
 app.use(cors())
+dotenv.config()
 
 
 app.get("/train", (req, res) => {
-    console.log(req.query)
+
         // if (!req.query.fromStation) {
         //     res.send("Please provide fromStation");
         // } else {
-    getStationCodeFromSearch(req.query.fromStation, (error, response) => {
-            if (error) {
-                return console.log(error);
-            }
-            fromStationCode = response.station_code;
-        })
+    // getStationCodeFromSearch(req.query.fromStation, (error, response) => {
+    //         if (error) {
+    //             return console.log(error);
+    //         }
+    //         fromStationCode = response.station_code;
+    //     })
         //         getStationCodeFromSearch(req.query.toStation, (error, response) => {
         //             if (error) {
         //                 return console.log(error)
         //             }
         //             toStationCode = response.station_code;
-        //             // Following code sets the leavingDate.
+   // Following code sets the leavingDate.
     let leavingDate;
     let now;
     if (req.query.leavingDate) {
@@ -68,18 +67,20 @@ app.get("/train", (req, res) => {
             minute = "0" + minute;
         }
         leavingTime = `${hour}:${minute}`
-    }
+    } 
     console.log("The date is " + leavingDate + " and the time is " + leavingTime)
-        // Following code gets the train info.
+        
+    // Following code gets the train info.
     getTrainInfoFromStationCode(req.query.chosenFromStation, req.query.chosenToStation, leavingDate, leavingTime, (error, outboundResult) => {
+        
         if (error) {
             return console.log(error);
         }
         // console.log(response.allDepartures)
         // allDepartures = response.allDepartures
-        console.log(outboundResult)
-        getTicketFares(req.query.fromStationCode, req.query.chosenToStation, (error, response) => {
-            console.log(response.fares)
+        // console.log(outboundResult)
+        getTicketFares(req.query.chosenFromStation, req.query.chosenToStation, (error, response) => {
+            // console.log(response.fares)
             res.send({
                 allDepartures: outboundResult,
                 fares: response.fares
@@ -92,30 +93,21 @@ app.get("/train", (req, res) => {
     //  }
 })
 
-app.get('/chooseFromStation', (req, res) => {
-    if (!req.query.fromStation) {
+//This is a route which gets the list of stations searched by user, to be fetched in front-end.
+app.get('/getStationList', (req, res) => {
+    if (!req.query.placeName) {
         console.log('error')
         res.send('Please provide a station name')
 
     } else {
-        let url = `http://transportapi.com/v3/uk/places.json?query=${req.query.fromStation}&type=train_station&app_id=fea7751f&app_key=702c5fbff7c11ddaa834da79ac4e6ddf`
-        request({ url, json: true }, (error, response) => {
-            // console.log(response.body.member)
-            res.send({ stations: response.body.member })
-        })
-    }
-})
-
-app.get('/chooseToStation', (req, res) => {
-    if (!req.query.toStation) {
-        console.log('error')
-        res.send('Please provide a station name')
-
-    } else {
-        let url = `http://transportapi.com/v3/uk/places.json?query=${req.query.toStation}&type=train_station&app_id=fea7751f&app_key=702c5fbff7c11ddaa834da79ac4e6ddf`
-        request({ url, json: true }, (error, response) => {
-            // console.log(response.body.member)
-            res.send({ stations: response.body.member })
+        getStationCodeFromSearch(req.query.placeName, (error, response) => {
+            if(error) {
+                return console.log(error)
+            }
+            res.send({
+                stations: response.stations
+            }) 
+            
         })
     }
 })

@@ -32,11 +32,11 @@ const Home = (props) => {
                 </select>
                 <span className='time-info'>
                     <input className="form-input" type="date" name="leavingDate" value={leavingDate} required placeholder="Today" onChange={(e)=>handleChange(e)}/>
-                    <select className="form-input" name="departingStatus" required onChange={(e)=>handleChange(e)}>
+                    {/* <select className="form-input" name="departingStatus" required onChange={(e)=>handleChange(e)}>
                         <option value="leavingAfter">Leaving After</option>
                         <option value="arrivingBefore">Arriving Before</option>
-                    </select>
-                    <input className="form-input" type="time" name="leavingTime" value={leavingTime} required placeholder="Time" onChange={(e)=>handleChange(e)}/>
+                    </select> */}
+                    <input className="form-input" type="time" name="leavingTime" value={leavingTime} placeholder="Time" onChange={(e)=>handleChange(e)}/>
                     <span><input type="checkbox" name="returnCheck" value={returnCheck} onChange={(e)=>handleChange(e)}/><label>Return?</label></span>
                 </span>
 
@@ -45,10 +45,10 @@ const Home = (props) => {
                 {returnCheck === true ? (
                     <span className='time-info'>
                     <input required className="form-input" type="date" name="returningDate" value={returningDate}  placeholder="Tomorrow" onChange={(e)=>handleChange(e)}/>
-                    <select required className="form-input"name="returningStatus" onChange={(e)=>props.handleChange(e)}>
+                    {/* <select required className="form-input"name="returningStatus" onChange={(e)=>props.handleChange(e)}>
                         <option value="leavingAfter">Leaving After</option>
                         <option value="arrivingBefore">Arriving Before</option>
-                    </select>
+                    </select> */}
                     
                     <input required className="form-input" type="time" name="returningTime" value={returningTime}  placeholder="Time" onChange={(e)=>handleChange(e)}/></span>
                 ) : (

@@ -8,8 +8,8 @@ import './App.css';
 import { debounce } from 'debounce';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
-const searchFromAPI = (fromStationParam) => fetch('http://localhost:3001/chooseFromStation?fromStation=' + fromStationParam)
-const searchToAPI = (toStationParam) => fetch('http://localhost:3001/chooseToStation?toStation=' + toStationParam)
+const searchFromAPI = (origin) => fetch('http://localhost:3001/getStationList?placeName=' + origin)
+const searchToAPI = (destination) => fetch('http://localhost:3001/getStationList?placeName=' + destination)
 
 const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 3000);
 const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 3000);
@@ -88,12 +88,13 @@ class App extends Component {
     handleSubmit = (e) => {
         console.log('submited')
         e.preventDefault()
-        fetch('http://localhost:3001/train?chosenFromStation=' + this.state.chosenFromStation + '&chosenToStation=' + this.state.chosenToStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
-            .then((response) => console.log(response))
-            .then((outbound) => ({ outbound }))
+        fetch('http://localhost:3001/train?fromStation=' + this.state.fromStation +'&chosenFromStation=' + this.state.chosenFromStation + '&chosenToStation=' + this.state.chosenToStation + '&leavingDate=' + this.state.leavingDate + '&leavingTime=' + this.state.leavingTime)
+            .then((response) => response.json())
+            .then((data) => this.setState({ outbound: data.allDepartures }))
     }
 
     handlePageDisplayed = (page) => {
+        window.location = page;
         this.setState({ pageDisplayed: page })
     }
 
@@ -117,7 +118,7 @@ class App extends Component {
                         home: 
                             <div>
     {/* This is a ternary operator deciding whether to render the home form or the results */}
-                                {outbound ? <Home fromStation = { fromStation }
+                                {outbound.length=== 0 ? <Home fromStation = { fromStation }
                                 toStation = { toStation }
                                 leavingDate = { leavingDate }
                                 departingStatus = { departingStatus }
@@ -135,12 +136,14 @@ class App extends Component {
                                 handleChange = { this.handleChange }
                                 handleChangeFromStation = { this.handleChangeFromStation }
                                 handleChangeToStation = { this.handleChangeToStation }
-                                handleSubmit = { this.handleSubmit }/> : <ResultPage />}
+                                handleSubmit = { this.handleSubmit }/> : 
+                                <ResultPage searchResults={outbound} />}
                             </div>,
                         news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>,
                         station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>
                     }[pageDisplayed]
                 }
+
                 
             <MenuBar handlePageDisplayed = { this.handlePageDisplayed }/>
 
