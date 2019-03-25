@@ -111,7 +111,20 @@ class App extends Component {
         this.setState({ pageDisplayed: page, searchBar: '' })
     }
 
-    // componentDidMount() {
+    componentDidMount() {
+        if (this.state.leavingDate === "") {
+            now = new Date()
+            month = now.getMonth() + 1
+            if (month < 10) {
+                month = "0" + month;
+            }
+            day = now.getDate() + 1
+            if (day < 10) {
+                day = "0" + day;
+            }
+            leavingDate = `${now.getFullYear()}-${month}-${day}`
+            this.setState({leavingDate: leavingDate})
+        }
     //     console.log(window.location.pathname)
     //     if (window.location.pathname.substr(0,5) === "/news") {
     //         this.setState({pageDisplayed: "news"})
@@ -119,7 +132,7 @@ class App extends Component {
     //     else if (window.location.pathname.substr(0,8) === "/station") {
     //         this.setState({pageDisplayed: "station"})
     //     }
-    // }
+    }
 
     render() {
 
