@@ -120,16 +120,14 @@ class App extends Component {
     }
 
     componentDidMount() {
-        // The following changes the page rendered if the address suggests to.
-        // console.log(window.location.pathname)
-        // if (window.location.pathname.substr(0,5) === "/news") {
-        //     this.setState({pageDisplayed: "news"})
-        // }
-        // else if (window.location.pathname.substr(0,8) === "/station") {
-        //     this.setState({pageDisplayed: "station"})
-
-          // Set the initial leavingDate
-          if (this.state.leavingDate === "") {
+        // let now;
+        // let month;
+        // let day;
+        // let hour;
+        // let minute;
+        // let tomorrow;
+        // Set the initial leavingDate
+        if (this.state.leavingDate === "") {
             let now = new Date()
             let month = now.getMonth() + 1
             if (month < 10) {
@@ -142,17 +140,65 @@ class App extends Component {
             this.setState({leavingDate: `${now.getFullYear()}-${month}-${day}`})
         }
 
+        // Set the initial leavingTime
+        if (this.state.leavingTime === "") {
+            let now = new Date()
+            let hour= now.getHours()
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            let minute = now.getMinutes()
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+            this.setState({leavingTime: `${hour}:${minute}`})
         }
-    
 
-       
+        // Set the initial returningDate
+        // if (this.state.returningDate === "") {
+         
+        //     let now = new Date()
+        //     let tomorrow = now + 3600000
+        //     let month = tomorrow.getMonth() + 1
+        //     if (month < 10) {
+        //         month = "0" + month;
+        //     }
+        //     let day = tomorrow.getDate() + 1
+        //     if (day < 10) {
+        //         day = "0" + day;
+        //     }
+        //     this.setState({returningDate: `${tomorrow.getFullYear()}-${month}-${day}`})
+        // }
+            
+        // // Set the initial returningTime
+        if (this.state.returningTime === "") {
+            let now = new Date()
+            let hour= now.getHours()
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            let minute = now.getMinutes()
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+            this.setState({returningTime: `${hour}:${minute}`})
+        }
+
+        // The following changes the page rendered if the address suggests to.
+        // console.log(window.location.pathname)
+        // if (window.location.pathname.substr(0,5) === "/news") {
+        //     this.setState({pageDisplayed: "news"})
+        // }
+        // else if (window.location.pathname.substr(0,8) === "/station") {
+        //     this.setState({pageDisplayed: "station"})
+        // }
+    }
 
     render() {
 
 
         const { stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
-       
 
             return ( <div className = "App" >
                 {
