@@ -13,8 +13,8 @@ const NewsPage = (props) => {
             <SearchBar handleChange={handleChange} pageDisplayed={pageDisplayed} searchBar={searchBar}/>
             <SearchBtn handleSearchNews={handleSearchNews}/>
             <div className="news-container">
-                {lateTrains.map(delayedTrain => {
-                        return <NewsCard key={delayedTrain.service} lateBy={delayedTrain.aimed_departure_time} expectedDeparture={delayedTrain.expected_departure_time}lateTrainOperator={delayedTrain.operator_name} destinationName={delayedTrain.destination_name}/>
+                {lateTrains.map(lateTrain => {
+                        return <NewsCard key={lateTrain.train_uid} delayedTrain={lateTrain}/>
                     })
                 }
             </div>

@@ -8,7 +8,7 @@ import './StationPage.css';
 const StationPage = (props) => {
     const {stationsSearch, handleSearchStn, handleChange, pageDisplayed, searchBar} = props
     return (
-        <div>
+        <div className="stationPage">
             <HeaderBar title="station information"/>
             <SearchBar handleChange={handleChange} pageDisplayed={pageDisplayed} searchBar={searchBar}/>
             <SearchBtnStn handleSearchStn={handleSearchStn}/>

@@ -8,7 +8,7 @@ const ResultPage = (props) => {
     const {searchResults} = props
 
     return (
-        <div>
+        <div className="resultPage">
             <HeaderBar title="live times & tickets"/>
             <div className='result-container'>
                 
