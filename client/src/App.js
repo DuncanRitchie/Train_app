@@ -99,11 +99,11 @@ class App extends Component {
     }
 
     //handle the Search button for search bar
-    handleSearch = (e) => {
+    handleSearchNews = (e) => {
         const {searchBar} = this.state
         fetch('http://localhost:3001/news?address=' + searchBar)
             .then((response) => response.json())
-            .then((data) => this.setState({news: data.news}))
+            .then((data) => this.setState({news: data.delayedTrains}))
     }
 
     handlePageDisplayed = (page) => {
@@ -152,7 +152,7 @@ class App extends Component {
                                 handleSubmit = { this.handleSubmit }/> : 
                                 <ResultPage searchResults={outbound} />}
                             </div>,
-                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearch={this.handleSearch} lateTrains={news}/>,
+                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearchNews={this.handleSearchNews} lateTrains={news}/>,
                         station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>
                     }[pageDisplayed]
                 }
