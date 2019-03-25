@@ -14,9 +14,13 @@ const getNewsFromStationCode = require("./server-src/getNews")
 const port = process.env.PORT || 3001;
 
 const publicDirectory = path.join(__dirname, "client/build");
-app.use(express.static(publicDirectory));
+app.use(express.static('dist'));
 app.use(cors())
 dotenv.config()
+
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
 
 app.get("/train", (req, res) => {
 
