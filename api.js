@@ -131,11 +131,11 @@ app.get("/news", (req, res) => {
     if (!req.query.address) {
         res.send("Please provide an address");
     } else {
-        getStationCodeFromSearch(req.query.address, (error, {stations} ={}) => {
+        getStationCodeFromSearch(req.query.address, (error, response) => {
             if (error) {
                 return console.log(error);
             }
-            getNewsFromStationCode(stations, (error, response) => {
+            getNewsFromStationCode(response.stations, (error, response) => {
                 if (error) {
                     return console.log(error);
                 }
