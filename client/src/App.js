@@ -106,6 +106,14 @@ class App extends Component {
             .then((data) => this.setState({news: data.delayedTrains}))
     }
 
+    handleSearchStn = (e) => {
+        const {searchBar} = this.state
+        fetch('http://localhost:3001/station?address=' + searchBar)
+            .then((response) => response.json())
+            .then((data) => this.setState({stationInfo: data.stations}))
+    }
+
+    //handle page display rendering between, home, news and stn info
     handlePageDisplayed = (page) => {
         // window.location = page;
         this.setState({ pageDisplayed: page, searchBar: '' })
@@ -124,7 +132,8 @@ class App extends Component {
 
     render() {
 
-        const { news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+
+        const { stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
         // Set the initial leavingDate
         if (leavingDate === "") {
@@ -139,6 +148,7 @@ class App extends Component {
             }
             this.setState({leavingDate: `${now.getFullYear()}-${month}-${day}`})
         }
+
 
             return ( <div className = "App" >
                 {
@@ -169,7 +179,7 @@ class App extends Component {
                                 <ResultPage searchResults={outbound} />}
                             </div>,
                         news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearchNews={this.handleSearchNews} lateTrains={news}/>,
-                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar}/>
+                        station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearchStn={this.handleSearchStn} stationsSearch={stationInfo}/>
                     }[pageDisplayed]
                 }
 
