@@ -139,6 +139,7 @@ class App extends Component {
             chosenToStation: '',
             chooseToStations: [],
             outbound: [],
+            errorMsg: '',
             pageDisplayed: "home",   
         })
         makeDateCurrent();
