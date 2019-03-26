@@ -39,7 +39,7 @@ const Home = (props) => {
                         <option value="arrivingBefore">Arriving Before</option>
                     </select> */}
                     <input className="form-input" type="time" name="leavingTime" value={leavingTime} placeholder="Time" onChange={(e)=>handleChange(e)}/>
-                    <span><input type="checkbox" name="returnCheck" value={returnCheck} onChange={(e)=>handleChange(e)}/><label>Return?</label></span>
+                    <div className="returnCheckDiv"><input type="checkbox" name="returnCheck" value={returnCheck} onChange={(e)=>handleChange(e)}/><label>Return?</label></div>
                 </span>
 
                 
@@ -54,12 +54,12 @@ const Home = (props) => {
                     
                     <input required className="form-input" type="time" name="returningTime" value={returningTime}  placeholder="Time" onChange={(e)=>handleChange(e)}/></span>
                 ) : (
-                    <span></span>
+                    null
                 )}
-
-                <span className="count-container"><label>adult:</label> <input required className="count" type="number" min='1' max='5' name='adultCount' value={adultCount} onChange={(e)=>handleChange(e)}/></span>
-                <span className="count-container"><label>children:</label> <input required className="count" type="number" min='0' max='5' name='childCount' value={childCount} onChange={(e)=>handleChange(e)}/></span>
-
+                <div className="count-containers">
+                    <div className="count-container"><label><i class="fas fa-user-tie" role="img" aria-label="Adult" title="Adult"></i></label> <input required className="count" type="number" min='0' max='5' name='adultCount' value={adultCount} onChange={(e)=>handleChange(e)}/></div>
+                    <div className="count-container"><label><i class="fas fa-child" role="img" aria-label="Child" title="Child"></i></label> <input required className="count" type="number" min='0' max='5' name='childCount' value={childCount} onChange={(e)=>handleChange(e)}/></div>
+                </div>
                 <button className="submit-btn" onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
                 <p className="error-msg">{errorMsg}</p>
             </form>
