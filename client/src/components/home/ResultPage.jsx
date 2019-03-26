@@ -5,11 +5,12 @@ import './ResultPage.css'
 import HeaderBar from './HeaderBar'
 
 const ResultPage = (props) => {
-    const {searchResults} = props
+    const {searchResults, handleBackHome, handlePageDisplayed} = props
 
     return (
         <div className="resultPage">
             <HeaderBar title="live times & tickets"/>
+            <button onClick={()=> handlePageDisplayed("home")}>back</button>
             <div className='result-container'>
                 
                 {searchResults &&

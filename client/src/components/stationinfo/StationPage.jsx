@@ -9,7 +9,7 @@ const StationPage = (props) => {
     const {stationsSearch, handleSearchStn, handleChange, pageDisplayed, searchBar} = props
     return (
         <div className="stationPage">
-            <HeaderBar title="station information"/>
+            <HeaderBar title="station list"/>
             <SearchBar handleChange={handleChange} pageDisplayed={pageDisplayed} searchBar={searchBar}/>
             <SearchBtnStn handleSearchStn={handleSearchStn}/>
                         

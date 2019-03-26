@@ -98,19 +98,41 @@ class App extends Component {
             .then((data) => this.setState({ outbound: data.allDepartures }))
     }
 
-    //handle the Search button for search bar
+    //handle the Search button for search News list
     handleSearchNews = (e) => {
         const {searchBar} = this.state
         fetch('http://localhost:3001/news?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({news: data.delayedTrains}))
     }
-
+    
+    //handle the Search button for search Station list 
     handleSearchStn = (e) => {
         const {searchBar} = this.state
         fetch('http://localhost:3001/station?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({stationInfo: data.stations}))
+    }
+
+    handleBackHome = (e) => {
+        this.setState({
+            fromStation: '',
+            toStation: '',
+            leavingDate: '',
+            departingStatus: '',
+            leavingTime: '',
+            returnCheck: false,
+            returningDate: '',
+            returningStatus: '',
+            returningTime: '',
+            adultCount: 1,
+            childCount: 0,
+            chooseFromStations: [],
+            chosenFromStation: '',
+            chosenToStation: '',
+            chooseToStations: [],
+            outbound: [],   
+        })
     }
 
     //handle page display rendering between, home, news and stn info
@@ -122,7 +144,7 @@ class App extends Component {
     componentDidMount() {
         let now, month, day, hour, minute, tomorrow;
         // Set the initial leavingDate
-        if (this.state.leavingDate === undefined) {
+        if (this.state.leavingDate === "") {
             now = new Date()
             month = now.getMonth() + 1
             if (month < 10) {
@@ -136,7 +158,7 @@ class App extends Component {
         }
 
         // Set the initial leavingTime
-        if (this.state.leavingTime === undefined) {
+        if (this.state.leavingTime === "") {
             now = new Date()
             hour= now.getHours()
             if (hour < 10) {
@@ -150,21 +172,21 @@ class App extends Component {
         }
 
         // Set the initial returningDate
-        if (this.state.returningDate === undefined) {
-            tomorrow = new Date() + 1
-            month = tomorrow.getMonth() + 1
-            if (month < 10) {
-                month = "0" + month;
-            }
-            day = tomorrow.getDate() + 1
-            if (day < 10) {
-                day = "0" + day;
-            }
-            this.setState({returningDate: `${now.getFullYear()}-${month}-${day}`})
-        }
+        // if (this.state.returningDate === "") {
+        //     tomorrow = new Date() + 1
+        //     month = tomorrow.getMonth() + 1
+        //     if (month < 10) {
+        //         month = "0" + month;
+        //     }
+        //     day = tomorrow.getDate() + 1
+        //     if (day < 10) {
+        //         day = "0" + day;
+        //     }
+        //     this.setState({returningDate: `${now.getFullYear()}-${month}-${day}`})
+        // }
             
         // Set the initial returningTime
-        if (this.state.returningTime === undefined) {
+        if (this.state.returningTime === "") {
             now = new Date()
             hour= now.getHours()
             if (hour < 10) {
@@ -190,7 +212,7 @@ class App extends Component {
     render() {
 
 
-        const { stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+        const { handleBackHome, stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
 
             return ( <div className = "App" >
@@ -219,9 +241,9 @@ class App extends Component {
                                 handleChangeFromStation = { this.handleChangeFromStation }
                                 handleChangeToStation = { this.handleChangeToStation }
                                 handleSubmit = { this.handleSubmit }/> : 
-                                <ResultPage searchResults={outbound} />}
+                                <ResultPage searchResults={outbound} handleBackHome={this.handleBackHome}/>}
                             </div>,
-                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearchNews={this.handleSearchNews} lateTrains={news}/>,
+                        news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handlePageDisplayed={this.handlePageDisplayed} handleSearchNews={this.handleSearchNews} lateTrains={news}/>,
                         station: <StationPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handleSearchStn={this.handleSearchStn} stationsSearch={stationInfo}/>
                     }[pageDisplayed]
                 }
