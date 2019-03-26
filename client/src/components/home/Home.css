@@ -28,7 +28,7 @@ select {
     padding: 5px;
     margin-top: -12px;
     align-self: center;
-    width: calc(100% - 25px)
+    width: calc(100% - 30px)
 }
 
 .time-info {
