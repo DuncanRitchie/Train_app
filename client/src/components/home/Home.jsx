@@ -3,12 +3,12 @@ import './Home.css';
 import HeaderBar from './HeaderBar'
 
 const Home = (props) => {
-    const { handleSelectToStation, handleSelectFromStation, chooseFromStations, chooseToStations, handleChangeToStation, handleChangeFromStation, fromStation, toStation, leavingDate, leavingTime, returnCheck, returningDate, returningTime, adultCount, childCount, handleChange} = props
+    const { errorMsg, handleSelectToStation, handleSelectFromStation, chooseFromStations, chooseToStations, handleChangeToStation, handleChangeFromStation, fromStation, toStation, leavingDate, leavingTime, returnCheck, returningDate, returningTime, adultCount, childCount, handleChange} = props
     return (
         <div className="journeyplanner">
             <HeaderBar title="live times &amp; tickets" />
             <form action="" method="" onSubmit={props.handleSubmit}>
-                <label>Where from? <br /><span class="label-small">Type your origin station in the box, then select it from the dropdown menu that appears.</span></label>
+                <label>Where from? <br /><span className="label-small">Type your origin station in the box, then select it from the dropdown menu that appears.</span></label>
                 <input className="form-input" type="text" name="fromStation" value={fromStation} required title="Type your origin station in this box, then select it from the dropdown menu." placeholder="Origin station" onChange={(e)=>handleChangeFromStation(e)}/>
                 {fromStation.length > 0 && (
                     <select onChange={(e) => handleSelectFromStation(e)} className={fromStation === "" ? "hidden" : "not-hidden"}>
@@ -20,7 +20,7 @@ const Home = (props) => {
                         })}
                     </select>
                 )}
-                <label>Where to? <br/><span class="label-small">Type your destination station in the box, then select it from the dropdown menu that appears.</span></label>
+                <label>Where to? <br/><span className="label-small">Type your destination station in the box, then select it from the dropdown menu that appears.</span></label>
                 <input className="form-input" type="text" name="toStation" value={toStation} required title="Type your destination station in this box, then select it from the dropdown menu." placeholder="Destination station" onChange={(e)=>handleChangeToStation(e)}/>
                 {toStation.length > 0 && (
                     <select onChange={(e) => handleSelectToStation(e)}>
@@ -61,6 +61,7 @@ const Home = (props) => {
                 <span className="count-container"><label>children:</label> <input required className="count" type="number" min='0' max='5' name='childCount' value={childCount} onChange={(e)=>handleChange(e)}/></span>
 
                 <button className="submit-btn" onSubmit={props.handleSubmitForm}>PLAN YOUR ROUTE</button>
+                <p className="error-msg">{errorMsg}</p>
             </form>
         </div>
     )

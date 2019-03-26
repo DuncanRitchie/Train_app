@@ -34,6 +34,7 @@ class App extends Component {
         chosenToStation: '',
         chooseToStations: [],
         outbound: [],
+        errorMsg: "",
         news: [],
         stationInfo: [],
         pageDisplayed: "home",
@@ -98,7 +99,13 @@ class App extends Component {
         e.preventDefault()
         fetch(urlBase + '/train?fromStation=' + fromStation +'&chosenFromStation=' + chosenFromStation + '&chosenToStation=' + chosenToStation + '&leavingDate=' + leavingDate + '&leavingTime=' + leavingTime)
             .then((response) => response.json())
-            .then((data) => this.setState({ outbound: data.allDepartures }))
+            .then((data) => {
+                this.setState({ outbound: data.allDepartures })
+                if (this.state.outbound.length === 0) {
+                    console.log("no direct train running")
+                    this.setState({errorMsg: "Sorry, no direct train running between your 2 stations!"})
+                }
+            })
     }
 
     //handle the Search button for search News list
@@ -218,7 +225,7 @@ class App extends Component {
     render() {
 
 
-        const {stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+        const {errorMsg, stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
 
             return ( <div className = "App" >
@@ -246,7 +253,7 @@ class App extends Component {
                                 handleChange = { this.handleChange }
                                 handleChangeFromStation = { this.handleChangeFromStation }
                                 handleChangeToStation = { this.handleChangeToStation }
-                                handleSubmit = { this.handleSubmit }/> : 
+                                handleSubmit = { this.handleSubmit } errorMsg={errorMsg}/> : 
                                 <ResultPage searchResults={outbound} handleBackHome={this.handleBackHome}/>}
                             </div>,
                         news: <NewsPage pageDisplayed={pageDisplayed} handleChange={this.handleChange} searchBar={searchBar} handlePageDisplayed={this.handlePageDisplayed} handleSearchNews={this.handleSearchNews} lateTrains={news}/>,
