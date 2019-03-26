@@ -7,8 +7,11 @@ import StationPage from './components/stationinfo/StationPage';
 import './App.css';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
-const searchFromAPI = (origin) => fetch('/getStationList?placeName=' + origin)
-const searchToAPI = (destination) => fetch('/getStationList?placeName=' + destination)
+let urlBase;
+window.location.hostname.substr(0,9) === "localhost" ? urlBase = "http://" + window.location.hostname : urlBase = "https://" + window.location.hostname
+
+const searchFromAPI = (origin) => fetch(urlBase + '/getStationList?placeName=' + origin)
+const searchToAPI = (destination) => fetch(urlBase + '/getStationList?placeName=' + destination)
 
 const searchAPIDebounced = AwesomeDebouncePromise(searchFromAPI, 1500);
 const searchToAPIDebounced = AwesomeDebouncePromise(searchToAPI, 1500);
@@ -93,7 +96,7 @@ class App extends Component {
         const {fromStation, chosenFromStation, chosenToStation, leavingDate, leavingTime} = this.state
         console.log('form submitted')
         e.preventDefault()
-        fetch('/train?fromStation=' + fromStation +'&chosenFromStation=' + chosenFromStation + '&chosenToStation=' + chosenToStation + '&leavingDate=' + leavingDate + '&leavingTime=' + leavingTime)
+        fetch(urlBase + '/train?fromStation=' + fromStation +'&chosenFromStation=' + chosenFromStation + '&chosenToStation=' + chosenToStation + '&leavingDate=' + leavingDate + '&leavingTime=' + leavingTime)
             .then((response) => response.json())
             .then((data) => this.setState({ outbound: data.allDepartures }))
     }
@@ -101,7 +104,7 @@ class App extends Component {
     //handle the Search button for search News list
     handleSearchNews = (e) => {
         const {searchBar} = this.state
-        fetch('/news?address=' + searchBar)
+        fetch(urlBase + '/news?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({news: data.delayedTrains}))
     }
@@ -109,7 +112,7 @@ class App extends Component {
     //handle the Search button for search Station list 
     handleSearchStn = (e) => {
         const {searchBar} = this.state
-        fetch('/station?address=' + searchBar)
+        fetch(urlBase + '/station?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({stationInfo: data.stations}))
     }
@@ -172,18 +175,19 @@ class App extends Component {
         }
 
         // Set the initial returningDate
-        // if (this.state.returningDate === "") {
-        //     tomorrow = new Date() + 1
-        //     month = tomorrow.getMonth() + 1
-        //     if (month < 10) {
-        //         month = "0" + month;
-        //     }
-        //     day = tomorrow.getDate() + 1
-        //     if (day < 10) {
-        //         day = "0" + day;
-        //     }
-        //     this.setState({returningDate: `${now.getFullYear()}-${month}-${day}`})
-        // }
+        if (this.state.returningDate === "") {
+            tomorrow = new Date()
+            tomorrow.setDate(tomorrow.getDate()+1)
+            month = tomorrow.getMonth() + 1
+            if (month < 10) {
+                month = "0" + month;
+            }
+            day = tomorrow.getDate() + 1
+            if (day < 10) {
+                day = "0" + day;
+            }
+            this.setState({returningDate: `${now.getFullYear()}-${month}-${day}`})
+        }
             
         // Set the initial returningTime
         if (this.state.returningTime === "") {

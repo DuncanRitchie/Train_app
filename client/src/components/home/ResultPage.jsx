@@ -24,4 +24,12 @@ const ResultPage = (props) => {
     )
 }
 
+// const BackBtn = (props) => {
+//     return(
+//         <div>
+//             <button onClick={()=> }>BACK</button>
+//         </div>
+//     )
+// }
+
 export default ResultPage;
