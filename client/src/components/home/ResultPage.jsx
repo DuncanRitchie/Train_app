@@ -16,7 +16,7 @@ const ResultPage = (props) => {
                 {searchResults &&
                     searchResults.map(result => {
                 
-                    return <ResultCard key={result.service} timetable={result}/>
+                    return <ResultCard key={result.train_uid} timetable={result}/>
                 })}
                 
             </div>

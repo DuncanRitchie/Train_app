@@ -76,3 +76,7 @@ select {
     align-self: center;
 }
 
+.error-msg {
+    text-align: center;
+}
+
