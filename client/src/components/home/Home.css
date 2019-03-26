@@ -4,7 +4,6 @@ form {
     flex-direction: column;
     width: 100%;
     text-align: left;
-    
 }
 
 .form-input {
@@ -14,6 +13,22 @@ form {
     margin: 10px 0;
     font-family: 'Poppins', sans-serif;
     background-color: #fefefe;
+}
+
+.label-small {
+    font-size: 12px;
+    color: #3A4750
+}
+
+select {
+    background-color: #eef6f6;
+    border: 2px solid #3A4750;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 5px;
+    margin-top: -12px;
+    align-self: center;
+    width: calc(100% - 25px)
 }
 
 .time-info {
