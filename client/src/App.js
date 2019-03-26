@@ -129,13 +129,9 @@ class App extends Component {
         this.setState({
             fromStation: '',
             toStation: '',
-            leavingDate: '',
             departingStatus: '',
-            leavingTime: '',
             returnCheck: false,
-            returningDate: '',
             returningStatus: '',
-            returningTime: '',
             adultCount: 1,
             childCount: 0,
             chooseFromStations: [],
@@ -143,8 +139,10 @@ class App extends Component {
             chosenToStation: '',
             chooseToStations: [],
             outbound: [],
+            errorMsg: '',
             pageDisplayed: "home",   
         })
+        makeDateCurrent();
     }
 
     //handle page display rendering between, home, news and stn info
@@ -153,7 +151,7 @@ class App extends Component {
         this.setState({ pageDisplayed: page, searchBar: '' })
     }
 
-    componentDidMount() {
+    makeDatesCurrent = () => {
         let now, month, day, hour, minute, tomorrow;
         // Set the initial leavingDate
         if (this.state.leavingDate === "") {
@@ -211,6 +209,10 @@ class App extends Component {
             }
             this.setState({returningTime: `${hour}:${minute}`})
         }
+    }
+
+    componentDidMount() {
+        this.makeDatesCurrent()
 
         // The following changes the page rendered if the address suggests to.
         console.log(window.location.pathname)
