@@ -225,8 +225,6 @@ class App extends Component {
     }
 
     render() {
-
-
         const {errorMsg, stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
 

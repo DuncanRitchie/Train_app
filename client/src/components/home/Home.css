@@ -40,8 +40,8 @@ select {
 }
 .time-info input {
     width: 45%;
+    min-width: 60px;
     margin-right:16px;
-    
 }
 
 .time-info select {
@@ -54,17 +54,30 @@ select {
     margin: 5px;
 }
 
+.returnCheckSpan {
+    display: inline-block;
+}
+
+.count-containers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
 .count-container {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    
 }
 
 .count {
     font-family: 'Poppins', sans-serif;
-    width: 30px;
+    margin-left: 12px;
+    width: 36px;
     border: none;
     text-align: center;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
+    border-radius: 12px;
 }
 
 .submit-btn {
@@ -83,4 +96,3 @@ select {
 .error-msg {
     text-align: center;
 }
-
