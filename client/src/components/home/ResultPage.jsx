@@ -5,12 +5,12 @@ import './ResultPage.css'
 import HeaderBar from './HeaderBar'
 
 const ResultPage = (props) => {
-    const {searchResults, handleBackHome, handlePageDisplayed} = props
+    const {searchResults, handleBackHome} = props
 
     return (
         <div className="resultPage">
             <HeaderBar title="live times & tickets"/>
-            <button onClick={()=> handlePageDisplayed("home")}>back</button>
+            <BackBtn handleBackHome={handleBackHome}/>
             <div className='result-container'>
                 
                 {searchResults &&
@@ -20,16 +20,12 @@ const ResultPage = (props) => {
                 })}
                 
             </div>
+
+            
         </div>
     )
 }
 
-// const BackBtn = (props) => {
-//     return(
-//         <div>
-//             <button onClick={()=> }>BACK</button>
-//         </div>
-//     )
-// }
+const BackBtn = ({handleBackHome}) => <button className="back-btn" onClick={handleBackHome}>BACK HOME</button>
 
 export default ResultPage;

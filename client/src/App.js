@@ -8,7 +8,7 @@ import './App.css';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
 let urlBase;
-window.location.hostname.substr(0,9) === "localhost" ? urlBase = "http://" + window.location.hostname : urlBase = "https://" + window.location.hostname
+window.location.hostname.substr(0,9) === "localhost" ? urlBase = "http://" + window.location.hostname + ":3001" : urlBase = "https://" + window.location.hostname
 
 const searchFromAPI = (origin) => fetch(urlBase + '/getStationList?placeName=' + origin)
 const searchToAPI = (destination) => fetch(urlBase + '/getStationList?placeName=' + destination)
@@ -117,6 +117,7 @@ class App extends Component {
             .then((data) => this.setState({stationInfo: data.stations}))
     }
 
+    //handle back button
     handleBackHome = (e) => {
         this.setState({
             fromStation: '',
@@ -134,7 +135,8 @@ class App extends Component {
             chosenFromStation: '',
             chosenToStation: '',
             chooseToStations: [],
-            outbound: [],   
+            outbound: [],
+            pageDisplayed: "home",   
         })
     }
 
@@ -167,7 +169,7 @@ class App extends Component {
             if (hour < 10) {
                 hour = "0" + hour;
             }
-            let minute = now.getMinutes()
+            minute = now.getMinutes()
             if (minute < 10) {
                 minute = "0" + minute;
             }
@@ -216,7 +218,7 @@ class App extends Component {
     render() {
 
 
-        const { handleBackHome, stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+        const {stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
 
             return ( <div className = "App" >

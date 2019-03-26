@@ -5,3 +5,13 @@
 .result-container {
     padding: 20px;
 }
+
+.back-btn{
+    padding: 5px;
+    background-color: #00ADB5;
+    color: #eee;
+    border: none;
+    border-radius: 100px;
+    padding: 10px;
+    margin: 10px;
+}
