@@ -169,7 +169,7 @@ class App extends Component {
             if (hour < 10) {
                 hour = "0" + hour;
             }
-            let minute = now.getMinutes()
+            minute = now.getMinutes()
             if (minute < 10) {
                 minute = "0" + minute;
             }
@@ -218,7 +218,7 @@ class App extends Component {
     render() {
 
 
-        const { handleBackHome, stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
+        const {stationInfo, news, chooseToStations, chooseFromStations, fromStation, toStation, leavingDate, departingStatus, leavingTime, returnCheck, returningDate, returningStatus, returningTime, adultCount, childCount, outbound, pageDisplayed, searchBar} = this.state
 
 
             return ( <div className = "App" >
