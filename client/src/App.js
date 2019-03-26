@@ -8,7 +8,7 @@ import './App.css';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 
 let urlBase;
-{window.location.hostname.substr(0,9) == "localhost" ? urlBase = "http://" + window.location.hostname : urlBase = "https://" + window.location.hostname}
+window.location.hostname.substr(0,9) === "localhost" ? urlBase = "http://" + window.location.hostname : urlBase = "https://" + window.location.hostname
 
 const searchFromAPI = (origin) => fetch(urlBase + '/getStationList?placeName=' + origin)
 const searchToAPI = (destination) => fetch(urlBase + '/getStationList?placeName=' + destination)

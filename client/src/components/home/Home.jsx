@@ -8,28 +8,30 @@ const Home = (props) => {
         <div className="journeyplanner">
             <HeaderBar title="live times &amp; tickets" />
             <form action="" method="" onSubmit={props.handleSubmit}>
-                <label>Where from?</label>
-                <input className="form-input" type="text" name="fromStation" value={fromStation} required placeholder="Station" onChange={(e)=>handleChangeFromStation(e)}/>
-                <label>Choose Origin Station</label>
-                <select onChange={(e) => handleSelectFromStation(e)}>
-                    <option>choose your origin station</option>
-                    {chooseFromStations.map((station) => {
-                        return (
-                            <option key={station.station_code} value={station.station_code}>{station.name}</option>
-                        )
-                    })}
-                </select>
-                <label>Where to?</label>
-                <input className="form-input" type="text" name="toStation" value={toStation} required placeholder="Station" onChange={(e)=>handleChangeToStation(e)}/>
-                <label>Choose Destination Station</label>
-                <select onChange={(e) => handleSelectToStation(e)}>
-                    <option>choose your destination station</option>
-                    {chooseToStations.map((station) => {
-                        return (
-                            <option key={station.station_code} value={station.name}>{station.name}</option>
-                        )
-                    })}
-                </select>
+                <label>Where from? <br /><span class="label-small">Type your origin station in the box, then select it from the dropdown menu that appears.</span></label>
+                <input className="form-input" type="text" name="fromStation" value={fromStation} required title="Type your origin station in this box, then select it from the dropdown menu." placeholder="Origin station" onChange={(e)=>handleChangeFromStation(e)}/>
+                {fromStation.length > 0 && (
+                    <select onChange={(e) => handleSelectFromStation(e)} className={fromStation === "" ? "hidden" : "not-hidden"}>
+                        <option>choose your origin station from this menu</option>
+                        {chooseFromStations.map((station) => {
+                            return (
+                                <option key={station.station_code} value={station.station_code}>{station.name}</option>
+                            )
+                        })}
+                    </select>
+                )}
+                <label>Where to? <br/><span class="label-small">Type your destination station in the box, then select it from the dropdown menu that appears.</span></label>
+                <input className="form-input" type="text" name="toStation" value={toStation} required title="Type your destination station in this box, then select it from the dropdown menu." placeholder="Destination station" onChange={(e)=>handleChangeToStation(e)}/>
+                {toStation.length > 0 && (
+                    <select onChange={(e) => handleSelectToStation(e)}>
+                        <option>choose your destination station from this menu</option>
+                        {chooseToStations.map((station) => {
+                            return (
+                                <option key={station.station_code} value={station.name}>{station.name}</option>
+                            )
+                        })}
+                    </select>
+                )}
                 <span className='time-info'>
                     <input className="form-input" type="date" name="leavingDate" value={leavingDate} required placeholder="Today" onChange={(e)=>handleChange(e)}/>
                     {/* <select className="form-input" name="departingStatus" required onChange={(e)=>handleChange(e)}>
