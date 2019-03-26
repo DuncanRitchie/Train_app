@@ -9,7 +9,7 @@ const MenuBar = (props) => {
                     <li>
                         {
                             props.pageDisplayed === page
-                            ? <a className="nav-link current-page">{page}</a>
+                            ? <span className="nav-link current-page">{page}</span>
                             : <a className="nav-link" href={"/"+page}>{page}</a>
                         }
                     </li>
