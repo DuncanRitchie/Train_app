@@ -40,8 +40,8 @@ select {
 }
 .time-info input {
     width: 45%;
+    min-width: 60px;
     margin-right:16px;
-    
 }
 
 .time-info select {
@@ -54,8 +54,8 @@ select {
     margin: 5px;
 }
 
-.returnCheckDiv {
-    display: inline-block
+.returnCheckSpan {
+    display: inline-block;
 }
 
 .count-containers {
@@ -96,4 +96,3 @@ select {
 .error-msg {
     text-align: center;
 }
-

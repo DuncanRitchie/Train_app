@@ -8,7 +8,9 @@ const Home = (props) => {
         <div className="journeyplanner">
             <HeaderBar title="live times &amp; tickets" />
             <form action="" method="" onSubmit={props.handleSubmit}>
-                <label>Where from? <br /><span className="label-small">Type your origin station in the box, then select it from the dropdown menu that appears.</span></label>
+                <label>Where from? <br />
+                    <span className="label-small">Type your origin station in the box, then select it from the dropdown menu that appears.</span>
+                </label>
                 <input className="form-input" type="text" name="fromStation" value={fromStation} required title="Type your origin station in this box, then select it from the dropdown menu." placeholder="Origin station" onChange={(e)=>handleChangeFromStation(e)}/>
                 {fromStation.length > 0 && (
                     <select onChange={(e) => handleSelectFromStation(e)} className={fromStation === "" ? "hidden" : "not-hidden"}>
@@ -20,7 +22,9 @@ const Home = (props) => {
                         })}
                     </select>
                 )}
-                <label>Where to? <br/><span className="label-small">Type your destination station in the box, then select it from the dropdown menu that appears.</span></label>
+                <label>Where to? <br/>
+                    <span className="label-small">Type your destination station in the box, then select it from the dropdown menu that appears.</span>
+                </label>
                 <input className="form-input" type="text" name="toStation" value={toStation} required title="Type your destination station in this box, then select it from the dropdown menu." placeholder="Destination station" onChange={(e)=>handleChangeToStation(e)}/>
                 {toStation.length > 0 && (
                     <select onChange={(e) => handleSelectToStation(e)}>
@@ -32,6 +36,9 @@ const Home = (props) => {
                         })}
                     </select>
                 )}
+
+                
+
                 <span className='time-info'>
                     <input className="form-input" type="date" name="leavingDate" value={leavingDate} required placeholder="Today" onChange={(e)=>handleChange(e)}/>
                     {/* <select className="form-input" name="departingStatus" required onChange={(e)=>handleChange(e)}>
@@ -39,7 +46,7 @@ const Home = (props) => {
                         <option value="arrivingBefore">Arriving Before</option>
                     </select> */}
                     <input className="form-input" type="time" name="leavingTime" value={leavingTime} placeholder="Time" onChange={(e)=>handleChange(e)}/>
-                    <div className="returnCheckDiv"><input type="checkbox" name="returnCheck" value={returnCheck} onChange={(e)=>handleChange(e)}/><label>Return?</label></div>
+                    <span className="returnCheckSpan"><input type="checkbox" name="returnCheck" value={returnCheck} onChange={(e)=>handleChange(e)}/><label>Return?</label></span>
                 </span>
 
                 
