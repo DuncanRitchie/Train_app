@@ -111,7 +111,7 @@ class App extends Component {
     //handle the Search button for search News list
     handleSearchNews = (e) => {
         const {searchBar} = this.state
-        fetch(urlBase + '/news?address=' + searchBar)
+        fetch(urlBase + '/getnews?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({news: data.delayedTrains}))
     }
@@ -119,7 +119,7 @@ class App extends Component {
     //handle the Search button for search Station list 
     handleSearchStn = (e) => {
         const {searchBar} = this.state
-        fetch(urlBase + '/station?address=' + searchBar)
+        fetch(urlBase + '/getstation?address=' + searchBar)
             .then((response) => response.json())
             .then((data) => this.setState({stationInfo: data.stations}))
     }
