@@ -113,7 +113,7 @@ app.get('/getStationList', (req, res) => {
 })
 
 //route to get station info
-app.get("/station", (req, res) => {
+app.get("/getstation", (req, res) => {
     if (!req.query.address) {
         res.send("Please provide an address")
     } else {
@@ -128,7 +128,7 @@ app.get("/station", (req, res) => {
 })
 
 //route to get news
-app.get("/news", (req, res) => {
+app.get("/getnews", (req, res) => {
     if (!req.query.address) {
         res.send("Please provide an address");
     } else {
