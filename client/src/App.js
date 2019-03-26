@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Home from './components/home/Home';
-import MenuBar from './components/home/MenuBar';
+import MenuBar from './components/MenuBar';
 import ResultPage from './components/home/ResultPage';
 import NewsPage from './components/service-news/NewsPage';
 import StationPage from './components/stationinfo/StationPage';
@@ -162,7 +162,7 @@ class App extends Component {
             if (month < 10) {
                 month = "0" + month;
             }
-            let day = now.getDate() + 1
+            day = now.getDate() + 1
             if (day < 10) {
                 day = "0" + day;
             }
@@ -213,13 +213,13 @@ class App extends Component {
         }
 
         // The following changes the page rendered if the address suggests to.
-        // console.log(window.location.pathname)
-        // if (window.location.pathname.substr(0,5) === "/news") {
-        //     this.setState({pageDisplayed: "news"})
-        // }
-        // else if (window.location.pathname.substr(0,8) === "/station") {
-        //     this.setState({pageDisplayed: "station"})
-        // }
+        console.log(window.location.pathname)
+        if (window.location.pathname.substr(0,5) === "/news") {
+            this.setState({pageDisplayed: "news"})
+        }
+        else if (window.location.pathname.substr(0,8) === "/station") {
+            this.setState({pageDisplayed: "station"})
+        }
     }
 
     render() {
@@ -262,7 +262,7 @@ class App extends Component {
                 }
 
                 
-            <MenuBar handlePageDisplayed = { this.handlePageDisplayed }/>
+            <MenuBar pageDisplayed = {pageDisplayed}/>
 
             </div>
         );
