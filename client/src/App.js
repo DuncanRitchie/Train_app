@@ -142,7 +142,7 @@ class App extends Component {
             errorMsg: '',
             pageDisplayed: "home",   
         })
-        makeDateCurrent();
+        this.makeDateCurrent();
     }
 
     //handle page display rendering between, home, news and stn info
