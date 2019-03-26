@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Home from './components/home/Home';
-import MenuBar from './components/home/MenuBar';
+import MenuBar from './components/MenuBar';
 import ResultPage from './components/home/ResultPage';
 import NewsPage from './components/service-news/NewsPage';
 import StationPage from './components/stationinfo/StationPage';
@@ -253,7 +253,7 @@ class App extends Component {
                 }
 
                 
-            <MenuBar handlePageDisplayed = { this.handlePageDisplayed }/>
+            <MenuBar pageDisplayed = {pageDisplayed}/>
 
             </div>
         );
