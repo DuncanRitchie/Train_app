@@ -153,7 +153,7 @@ class App extends Component {
             if (month < 10) {
                 month = "0" + month;
             }
-            let day = now.getDate() + 1
+            day = now.getDate() + 1
             if (day < 10) {
                 day = "0" + day;
             }
@@ -167,7 +167,7 @@ class App extends Component {
             if (hour < 10) {
                 hour = "0" + hour;
             }
-            let minute = now.getMinutes()
+            minute = now.getMinutes()
             if (minute < 10) {
                 minute = "0" + minute;
             }
@@ -204,13 +204,13 @@ class App extends Component {
         }
 
         // The following changes the page rendered if the address suggests to.
-        // console.log(window.location.pathname)
-        // if (window.location.pathname.substr(0,5) === "/news") {
-        //     this.setState({pageDisplayed: "news"})
-        // }
-        // else if (window.location.pathname.substr(0,8) === "/station") {
-        //     this.setState({pageDisplayed: "station"})
-        // }
+        console.log(window.location.pathname)
+        if (window.location.pathname.substr(0,5) === "/news") {
+            this.setState({pageDisplayed: "news"})
+        }
+        else if (window.location.pathname.substr(0,8) === "/station") {
+            this.setState({pageDisplayed: "station"})
+        }
     }
 
     render() {
