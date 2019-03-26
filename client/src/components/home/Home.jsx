@@ -8,9 +8,9 @@ const Home = (props) => {
         <div className="journeyplanner">
             <HeaderBar title="live times &amp; tickets" />
             <form action="" method="" onSubmit={props.handleSubmit}>
-                <label>Where from? <br /><span class="label-small">Type your origin station in the box, then select it from the dropdown menu.</span></label>
+                <label>Where from? <br /><span class="label-small">Type your origin station in the box, then select it from the dropdown menu that appears.</span></label>
                 <input className="form-input" type="text" name="fromStation" value={fromStation} required title="Type your origin station in this box, then select it from the dropdown menu." placeholder="Origin station" onChange={(e)=>handleChangeFromStation(e)}/>
-                {toStation.length > 0 && (
+                {fromStation.length > 0 && (
                     <select onChange={(e) => handleSelectFromStation(e)} className={fromStation === "" ? "hidden" : "not-hidden"}>
                         <option>choose your origin station from this menu</option>
                         {chooseFromStations.map((station) => {
@@ -20,7 +20,7 @@ const Home = (props) => {
                         })}
                     </select>
                 )}
-                <label>Where to? <br/><span class="label-small">Type your destination station in the box, then select it from the dropdown menu.</span></label>
+                <label>Where to? <br/><span class="label-small">Type your destination station in the box, then select it from the dropdown menu that appears.</span></label>
                 <input className="form-input" type="text" name="toStation" value={toStation} required title="Type your destination station in this box, then select it from the dropdown menu." placeholder="Destination station" onChange={(e)=>handleChangeToStation(e)}/>
                 {toStation.length > 0 && (
                     <select onChange={(e) => handleSelectToStation(e)}>
