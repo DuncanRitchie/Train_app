@@ -9,7 +9,7 @@ const ResultPage = (props) => {
 
     return (
         <div className="resultPage">
-            <HeaderBar title="live times & tickets"/>
+            <HeaderBar title="live times &amp; tickets"/>
             <BackBtn handleBackHome={handleBackHome}/>
             <div className='result-container'>
                 

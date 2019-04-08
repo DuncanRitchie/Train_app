@@ -4,6 +4,7 @@ import './ResultCard.css'
 const ResultCard = (props) => {
     const {timetable} = props
     console.log(timetable)
+    date = timetable.id.substr(60,10)
     return (
         <div className="result-card">
             <h4 className="time">Departing at: {timetable.aimed_departure_time}</h4>
@@ -11,6 +12,7 @@ const ResultCard = (props) => {
             <p className="places">{timetable.origin_name} to {timetable.destination_name}</p>
             <p className="train">{timetable.operator_name}</p>
             <p className="service">Service number: {timetable.service}</p>
+            <p className="uid">UID: {date} {timetable.train_uid}</p>
         </div>
     )
 }
