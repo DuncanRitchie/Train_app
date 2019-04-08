@@ -10,6 +10,7 @@ const ResultCard = (props) => {
             <h4 className="platform">Platform {timetable.platform}</h4>
             <p className="places">{timetable.origin_name} to {timetable.destination_name}</p>
             <p className="train">{timetable.operator_name}</p>
+            <p className="service">Service number: {timetable.service}</p>
         </div>
     )
 }

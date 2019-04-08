@@ -33,6 +33,11 @@
     text-align: left;
 }
 
+.service {
+    grid-row: 2/3;
+    grid-column: 1/2
+}
+
 .result-card:active {
     transform: scale(1.02);
     box-shadow: 1px 1px 3px darkgray;
