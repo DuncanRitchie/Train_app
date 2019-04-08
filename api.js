@@ -112,8 +112,8 @@ app.get('/getStationList', (req, res) => {
     }
 })
 
-
-app.get("/station", (req, res) => {
+//route to get station info
+app.get("/getstation", (req, res) => {
     if (!req.query.address) {
         res.send("Please provide an address")
     } else {
@@ -127,21 +127,22 @@ app.get("/station", (req, res) => {
     }
 })
 
-app.get("/news", (req, res) => {
+//route to get news
+app.get("/getnews", (req, res) => {
     if (!req.query.address) {
         res.send("Please provide an address");
     } else {
-        getStationCodeFromSearch(req.query.address, (error, response) => {
+        getStationCodeFromSearch(req.query.address, (error, {station_code} ={}) => {
             if (error) {
                 return console.log(error);
             }
-            getNewsFromStationCode(response.station_code, (error, response) => {
+            getNewsFromStationCode(station_code, (error, delayedTrains) => {
                 if (error) {
                     return console.log(error);
                 }
-                console.log(response.news)
+                console.log(delayedTrains)
                 res.send({
-                    news: response.news
+                    delayedTrains: delayedTrains
                 });
             });
         });

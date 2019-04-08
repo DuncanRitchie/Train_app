@@ -5,22 +5,27 @@ import './ResultPage.css'
 import HeaderBar from './HeaderBar'
 
 const ResultPage = (props) => {
-    const {searchResults} = props
+    const {searchResults, handleBackHome} = props
 
     return (
-        <div>
+        <div className="resultPage">
             <HeaderBar title="live times & tickets"/>
+            <BackBtn handleBackHome={handleBackHome}/>
             <div className='result-container'>
                 
                 {searchResults &&
                     searchResults.map(result => {
                 
-                    return <ResultCard key={result.service} timetable={result}/>
+                    return <ResultCard key={result.train_uid} timetable={result}/>
                 })}
                 
             </div>
+
+            
         </div>
     )
 }
+
+const BackBtn = ({handleBackHome}) => <button className="back-btn" onClick={handleBackHome}>BACK HOME</button>
 
 export default ResultPage;

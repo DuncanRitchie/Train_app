@@ -1,10 +1,13 @@
+body {
+    padding-bottom: 12px;
+}
+
 form {
     padding: 20px;
     display: flex;
     flex-direction: column;
     width: 100%;
     text-align: left;
-    
 }
 
 .form-input {
@@ -16,13 +19,29 @@ form {
     background-color: #fefefe;
 }
 
+.label-small {
+    font-size: 12px;
+    color: #3A4750
+}
+
+select {
+    background-color: #eef6f6;
+    border: 2px solid #3A4750;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 5px;
+    margin-top: -12px;
+    align-self: center;
+    width: calc(100% - 30px)
+}
+
 .time-info {
     font-family: 'Poppins', sans-serif;
 }
 .time-info input {
     width: 45%;
+    min-width: 60px;
     margin-right:16px;
-    
 }
 
 .time-info select {
@@ -35,17 +54,30 @@ form {
     margin: 5px;
 }
 
+.returnCheckSpan {
+    display: inline-block;
+}
+
+.count-containers {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
 .count-container {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    
 }
 
 .count {
     font-family: 'Poppins', sans-serif;
-    width: 30px;
+    margin-left: 12px;
+    width: 36px;
     border: none;
     text-align: center;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
+    border-radius: 12px;
 }
 
 .submit-btn {
@@ -61,3 +93,6 @@ form {
     align-self: center;
 }
 
+.error-msg {
+    text-align: center;
+}
